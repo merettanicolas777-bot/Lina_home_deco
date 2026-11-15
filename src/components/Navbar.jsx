@@ -207,14 +207,7 @@ export default function Navbar() {
                 ))}
               </motion.nav>
 
-              <div className="mt-auto flex items-center justify-between gap-4 px-7 pb-10 pt-8">
-                <Link
-                  to="/admin"
-                  onClick={() => setMobileOpen(false)}
-                  className="text-[10px] uppercase tracking-[0.2em] text-muted"
-                >
-                  Panel de administración
-                </Link>
+              <div className="mt-auto flex justify-end px-7 pb-10 pt-8">
                 <button
                   type="button"
                   onClick={() => {
