@@ -159,7 +159,7 @@ export default function Catalog() {
             </button>
           </div>
         ) : filtered.length ? (
-          <div className="grid grid-cols-2 gap-x-5 gap-y-10 sm:gap-x-8 lg:grid-cols-3 lg:gap-y-14">
+          <div className="grid grid-cols-2 gap-x-3.5 gap-y-5 sm:gap-x-6 sm:gap-y-7 lg:grid-cols-3 lg:gap-y-8">
             {filtered.map((product, index) => (
               <ProductCard key={product.id} product={product} index={index} />
             ))}

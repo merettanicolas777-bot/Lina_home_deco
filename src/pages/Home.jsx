@@ -170,7 +170,7 @@ export default function Home() {
           {loading ? (
             <ProductGridSkeleton count={4} />
           ) : products.length ? (
-            <div className="grid grid-cols-2 gap-x-5 gap-y-10 sm:gap-x-8 lg:grid-cols-4">
+            <div className="grid grid-cols-2 gap-x-3.5 gap-y-5 sm:gap-x-6 sm:gap-y-7 lg:grid-cols-4">
               {products.map((product, index) => (
                 <ProductCard key={product.id} product={product} index={index} />
               ))}
