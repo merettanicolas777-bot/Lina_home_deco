@@ -1,0 +1,92 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-cream text-ink font-sans antialiased;
+  }
+
+  ::selection {
+    @apply bg-clay/20 text-ink;
+  }
+
+  h1,
+  h2,
+  h3 {
+    @apply font-serif font-light text-ink;
+  }
+
+  input,
+  textarea,
+  select,
+  button {
+    font-family: inherit;
+  }
+
+  :focus-visible {
+    @apply outline-none ring-2 ring-clay/50 ring-offset-2 ring-offset-cream;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-[11px] font-medium uppercase tracking-[0.18em] transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-40;
+  }
+
+  .btn-primary {
+    @apply btn bg-ink text-cream hover:bg-clay-dark;
+  }
+
+  .btn-clay {
+    @apply btn bg-clay text-white hover:bg-clay-dark;
+  }
+
+  .btn-ghost {
+    @apply btn border border-ink/15 bg-transparent text-ink hover:border-ink/40 hover:bg-white/60;
+  }
+
+  .field {
+    @apply w-full rounded-xl border border-ink/12 bg-white/80 px-4 py-3 text-sm text-ink placeholder:text-muted/60 transition focus:border-clay focus:bg-white focus:outline-none focus:ring-2 focus:ring-clay/20;
+  }
+
+  .label {
+    @apply mb-2 block text-[10px] font-semibold uppercase tracking-[0.18em] text-muted;
+  }
+
+  .eyebrow {
+    @apply text-[10px] font-medium uppercase tracking-brand text-clay;
+  }
+}
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .shimmer {
+    background: linear-gradient(90deg, #efe9dd 0%, #f7f3ec 50%, #efe9dd 100%);
+    background-size: 200% 100%;
+    animation: shimmer 1.6s ease-in-out infinite;
+  }
+
+  @keyframes shimmer {
+    0% {
+      background-position: 200% 0;
+    }
+    100% {
+      background-position: -200% 0;
+    }
+  }
+}

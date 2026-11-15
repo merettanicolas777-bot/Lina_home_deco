@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" width="800" height="1000" role="img" aria-label="Difusor de varillas">
+  <defs>
+    <linearGradient id="bg3" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FAF6EE"/>
+      <stop offset="1" stop-color="#E6DBC8"/>
+    </linearGradient>
+    <linearGradient id="bottle" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#DFD2BF"/>
+      <stop offset="0.4" stop-color="#FBF6ED"/>
+      <stop offset="1" stop-color="#CBBBA2"/>
+    </linearGradient>
+    <linearGradient id="liquid" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#D9BE97"/>
+      <stop offset="1" stop-color="#B99B71"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="800" height="1000" fill="url(#bg3)"/>
+  <circle cx="400" cy="560" r="280" fill="#FFFFFF" opacity="0.35"/>
+  <ellipse cx="400" cy="890" rx="150" ry="18" fill="#A98E6C" opacity="0.22"/>
+
+  <!-- varillas -->
+  <g stroke="#B08E62" stroke-width="6" stroke-linecap="round">
+    <line x1="380" y1="640" x2="286" y2="372"/>
+    <line x1="392" y1="640" x2="342" y2="352"/>
+    <line x1="408" y1="640" x2="432" y2="346"/>
+    <line x1="420" y1="640" x2="496" y2="382"/>
+    <line x1="400" y1="640" x2="392" y2="330"/>
+  </g>
+
+  <!-- botella -->
+  <path d="M318 700 h164 a22 22 0 0 1 22 22 v130 a46 46 0 0 1-46 46 H342 a46 46 0 0 1-46-46 V722 a22 22 0 0 1 22-22 Z" fill="url(#bottle)"/>
+  <path d="M342 762 h116 v126 a30 30 0 0 1-30 30 h-56 a30 30 0 0 1-30-30 Z" fill="url(#liquid)" opacity="0.75"/>
+  <rect x="352" y="660" width="96" height="48" rx="10" fill="#F4EBDC"/>
+  <ellipse cx="400" cy="660" rx="48" ry="10" fill="#FFFCF4"/>
+  <rect x="344" y="790" width="112" height="86" rx="3" fill="#F8F1E4" opacity="0.94"/>
+  <g stroke="#B49A78" stroke-width="2.2" opacity="0.8">
+    <line x1="364" y1="818" x2="436" y2="818"/>
+    <line x1="364" y1="834" x2="418" y2="834"/>
+    <line x1="364" y1="850" x2="430" y2="850"/>
+  </g>
+  <path d="M330 720 c-2 60 0 110 4 148" fill="none" stroke="#FFFDF8" stroke-opacity="0.6" stroke-width="9" stroke-linecap="round"/>
+</svg>

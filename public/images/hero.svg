@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1250" width="1000" height="1250" role="img" aria-label="Ambiente cálido con vela de soja y florero">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0.55" y2="1">
+      <stop offset="0" stop-color="#F7F2E8"/>
+      <stop offset="0.45" stop-color="#EADFCB"/>
+      <stop offset="1" stop-color="#D8C5AA"/>
+    </linearGradient>
+    <linearGradient id="arch" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FCF8F1" stop-opacity="0.95"/>
+      <stop offset="1" stop-color="#F2E8D6" stop-opacity="0.7"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#FFE4BC" stop-opacity="0.95"/>
+      <stop offset="1" stop-color="#FFE4BC" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="vase" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#DFCDB2"/>
+      <stop offset="0.42" stop-color="#F8F1E4"/>
+      <stop offset="1" stop-color="#C9B393"/>
+    </linearGradient>
+    <linearGradient id="glass" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#C09B6C"/>
+      <stop offset="0.35" stop-color="#F3E1C2"/>
+      <stop offset="0.7" stop-color="#C8A377"/>
+      <stop offset="1" stop-color="#9C7A4E"/>
+    </linearGradient>
+    <linearGradient id="table" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#CEB695"/>
+      <stop offset="1" stop-color="#B99F7C"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1000" height="1250" fill="url(#bg)"/>
+  <path d="M130 1180 V520 A370 370 0 0 1 870 520 V1180 Z" fill="url(#arch)"/>
+  <path d="M130 1180 V520 A370 370 0 0 1 870 520 V1180" fill="none" stroke="#FFFDF8" stroke-opacity="0.5" stroke-width="3"/>
+
+  <rect x="0" y="905" width="1000" height="345" fill="url(#table)"/>
+  <rect x="0" y="903" width="1000" height="5" fill="#A98E6C" opacity="0.35"/>
+
+  <circle cx="700" cy="790" r="260" fill="url(#glow)"/>
+
+  <!-- florero -->
+  <ellipse cx="336" cy="906" rx="120" ry="16" fill="#8C7150" opacity="0.22"/>
+  <path d="M320 762 h38 v30 c28 13 45 51 45 96 v18 H275 v-18 c0-45 17-83 45-96 Z" fill="url(#vase)"/>
+  <ellipse cx="339" cy="762" rx="19" ry="6" fill="#FFFDF6" opacity="0.65"/>
+  <path d="M292 828 c10 26 16 50 14 78" fill="none" stroke="#FFFDF6" stroke-opacity="0.5" stroke-width="5" stroke-linecap="round"/>
+
+  <!-- ramas y pampas -->
+  <g fill="none" stroke="#B49A78" stroke-width="3.5" stroke-linecap="round">
+    <path d="M336 762 C318 664 296 584 262 502"/>
+    <path d="M340 762 C352 654 374 566 414 478"/>
+    <path d="M342 762 C338 676 332 600 340 512"/>
+    <path d="M330 762 C300 690 268 640 228 596"/>
+  </g>
+  <g fill="#E4D6C0">
+    <ellipse cx="260" cy="486" rx="17" ry="42" transform="rotate(-16 260 486)"/>
+    <ellipse cx="414" cy="462" rx="17" ry="44" transform="rotate(14 414 462)"/>
+    <ellipse cx="340" cy="498" rx="15" ry="38"/>
+    <ellipse cx="226" cy="582" rx="13" ry="32" transform="rotate(-26 226 582)"/>
+  </g>
+  <g fill="#CFBEA3">
+    <ellipse cx="252" cy="470" rx="8" ry="24" transform="rotate(-16 252 470)"/>
+    <ellipse cx="420" cy="444" rx="8" ry="26" transform="rotate(14 420 444)"/>
+  </g>
+
+  <!-- vela -->
+  <ellipse cx="642" cy="908" rx="92" ry="14" fill="#8C7150" opacity="0.25"/>
+  <circle cx="642" cy="742" r="58" fill="url(#glow)"/>
+  <path d="M642 690 c13 19 21 29 21 41 0 14-9 24-21 24 s-21-10-21-24 c0-12 8-22 21-41 Z" fill="#EBB878"/>
+  <path d="M642 706 c7 11 11 17 11 25 0 8-5 13-11 13 s-11-5-11-13 c0-8 4-14 11-25 Z" fill="#FFF4DA"/>
+  <line x1="642" y1="755" x2="642" y2="776" stroke="#8C7150" stroke-width="4" stroke-linecap="round"/>
+
+  <path d="M578 790 h128 a10 10 0 0 1 10 10 v92 a22 22 0 0 1-22 22 h-104 a22 22 0 0 1-22-22 v-92 a10 10 0 0 1 10-10 Z" fill="url(#glass)"/>
+  <ellipse cx="642" cy="791" rx="64" ry="10" fill="#FBF2E0" opacity="0.9"/>
+  <rect x="596" y="826" width="92" height="46" rx="3" fill="#F6EBD8" opacity="0.9"/>
+  <g stroke="#B49A78" stroke-width="2" opacity="0.7">
+    <line x1="608" y1="840" x2="676" y2="840"/>
+    <line x1="608" y1="850" x2="660" y2="850"/>
+    <line x1="608" y1="860" x2="668" y2="860"/>
+  </g>
+
+  <!-- libro y detalles -->
+  <rect x="742" y="862" width="118" height="18" rx="3" fill="#E7D9C2"/>
+  <rect x="750" y="844" width="104" height="18" rx="3" fill="#D9C7AC"/>
+
+  <g fill="#FFFDF8" opacity="0.35">
+    <circle cx="196" cy="330" r="3"/>
+    <circle cx="820" cy="250" r="4"/>
+    <circle cx="770" cy="410" r="2.5"/>
+  </g>
+</svg>

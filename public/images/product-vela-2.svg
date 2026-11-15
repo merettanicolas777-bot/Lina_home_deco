@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" width="800" height="1000" role="img" aria-label="Vela de soja higo y cedro">
+  <defs>
+    <linearGradient id="bg2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#F7F2E9"/>
+      <stop offset="1" stop-color="#DFD3C0"/>
+    </linearGradient>
+    <radialGradient id="glow2" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#FFDCA8" stop-opacity="0.85"/>
+      <stop offset="1" stop-color="#FFDCA8" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="jar2" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#8E7151"/>
+      <stop offset="0.35" stop-color="#C6AC86"/>
+      <stop offset="1" stop-color="#6F563A"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="800" height="1000" fill="url(#bg2)"/>
+  <circle cx="400" cy="480" r="260" fill="#FFFFFF" opacity="0.3"/>
+  <circle cx="400" cy="470" r="240" fill="url(#glow2)"/>
+  <ellipse cx="400" cy="884" rx="170" ry="20" fill="#8C7150" opacity="0.2"/>
+
+  <path d="M400 408 c20 30 31 45 31 63 0 25-14 40-31 40 s-31-15-31-40 c0-18 11-33 31-63 Z" fill="#E8B071"/>
+  <path d="M400 442 c10 16 16 25 16 36 0 12-7 20-16 20 s-16-8-16-20 c0-11 6-20 16-36 Z" fill="#FFF3D9"/>
+  <line x1="400" y1="516" x2="400" y2="540" stroke="#6F563A" stroke-width="5" stroke-linecap="round"/>
+
+  <path d="M290 556 h220 a16 16 0 0 1 16 16 v276 a40 40 0 0 1-40 40 H314 a40 40 0 0 1-40-40 V572 a16 16 0 0 1 16-16 Z" fill="url(#jar2)"/>
+  <ellipse cx="400" cy="558" rx="110" ry="14" fill="#FDF3E0" opacity="0.8"/>
+  <rect x="330" y="668" width="140" height="96" rx="3" fill="#F4E8D3" opacity="0.9"/>
+  <g stroke="#A68A64" stroke-width="2.2" opacity="0.8">
+    <line x1="352" y1="696" x2="448" y2="696"/>
+    <line x1="352" y1="712" x2="424" y2="712"/>
+    <line x1="352" y1="728" x2="440" y2="728"/>
+  </g>
+  <path d="M306 596 c4 70 4 190 0 262" fill="none" stroke="#F3E3C8" stroke-opacity="0.35" stroke-width="9" stroke-linecap="round"/>
+
+  <g fill="#B49A78" opacity="0.45">
+    <ellipse cx="190" cy="820" rx="34" ry="14"/>
+    <ellipse cx="618" cy="850" rx="26" ry="10"/>
+  </g>
+</svg>

@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" width="800" height="1000" role="img" aria-label="Home spray de ambiente">
+  <defs>
+    <linearGradient id="bg4" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#F9F5ED"/>
+      <stop offset="1" stop-color="#E5DAC7"/>
+    </linearGradient>
+    <linearGradient id="glass4" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#D6C5AC"/>
+      <stop offset="0.42" stop-color="#FCF7EC"/>
+      <stop offset="1" stop-color="#C3AF92"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="800" height="1000" fill="url(#bg4)"/>
+  <circle cx="400" cy="540" r="270" fill="#FFFFFF" opacity="0.35"/>
+  <ellipse cx="400" cy="886" rx="150" ry="18" fill="#A98E6C" opacity="0.22"/>
+
+  <!-- bruma -->
+  <g stroke="#C4A484" stroke-width="3" stroke-linecap="round" opacity="0.45">
+    <path d="M214 420 c-26 6-44 20-54 40"/>
+    <path d="M206 466 c-30 2-52 14-66 34"/>
+    <path d="M190 372 c-22-2-40-10-52-24"/>
+  </g>
+  <g fill="#C4A484" opacity="0.35">
+    <circle cx="158" cy="452" r="4"/>
+    <circle cx="128" cy="500" r="3"/>
+    <circle cx="140" cy="404" r="3"/>
+  </g>
+
+  <!-- frasco -->
+  <path d="M306 640 h188 a24 24 0 0 1 24 24 v186 a40 40 0 0 1-40 40 H322 a40 40 0 0 1-40-40 V664 a24 24 0 0 1 24-24 Z" fill="url(#glass4)"/>
+  <path d="M326 710 h148 v140 a26 26 0 0 1-26 26 h-96 a26 26 0 0 1-26-26 Z" fill="#E4D3B7" opacity="0.6"/>
+  <rect x="352" y="596" width="96" height="48" rx="8" fill="#EFE6D5"/>
+  <rect x="340" y="560" width="120" height="42" rx="10" fill="#E3D8C5"/>
+  <rect x="318" y="540" width="52" height="24" rx="8" fill="#D8CBB6"/>
+  <rect x="338" y="756" width="124" height="94" rx="3" fill="#F8F1E4" opacity="0.94"/>
+  <g stroke="#B49A78" stroke-width="2.2" opacity="0.8">
+    <line x1="360" y1="786" x2="440" y2="786"/>
+    <line x1="360" y1="802" x2="414" y2="802"/>
+    <line x1="360" y1="818" x2="434" y2="818"/>
+  </g>
+  <path d="M320 664 c-2 60 0 120 4 152" fill="none" stroke="#FFFDF8" stroke-opacity="0.55" stroke-width="9" stroke-linecap="round"/>
+</svg>
