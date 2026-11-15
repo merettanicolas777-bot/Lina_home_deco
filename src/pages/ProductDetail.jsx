@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { ArrowLeft, Check, Leaf, Minus, Package, Plus, Truck } from 'lucide-react'
+import { ArrowLeft, Check, Gift, Minus, Package, Plus, Truck } from 'lucide-react'
 import { fetchProduct } from '../lib/products'
 import { useCart } from '../context/CartContext'
 import { formatARS } from '../utils/format'
@@ -105,7 +105,7 @@ export default function ProductDetail() {
           </div>
           <div className="mt-4 grid grid-cols-3 gap-3">
             {[
-              { icon: Leaf, label: 'Cera de soja' },
+              { icon: Gift, label: 'Para regalar' },
               { icon: Package, label: 'Hecho a mano' },
               { icon: Truck, label: 'Envíos' },
             ].map(({ icon: Icon, label }) => (

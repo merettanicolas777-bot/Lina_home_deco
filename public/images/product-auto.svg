@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" width="800" height="1000" role="img" aria-label="Difusor de auto colgante">
+  <defs>
+    <linearGradient id="bgA" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FAF6EE"/>
+      <stop offset="1" stop-color="#E6DBC9"/>
+    </linearGradient>
+    <linearGradient id="glassA" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#C4A171"/>
+      <stop offset="0.4" stop-color="#F2DFBE"/>
+      <stop offset="1" stop-color="#A9865A"/>
+    </linearGradient>
+    <linearGradient id="woodA" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#B08F68"/>
+      <stop offset="0.45" stop-color="#DCC3A0"/>
+      <stop offset="1" stop-color="#95774F"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="800" height="1000" fill="url(#bgA)"/>
+  <circle cx="400" cy="540" r="280" fill="#FFFFFF" opacity="0.35"/>
+  <ellipse cx="400" cy="820" rx="150" ry="20" fill="#A98E6C" opacity="0.22"/>
+
+  <!-- cordón -->
+  <path d="M400 176 c-62 0-104 52-104 110 0 64 44 108 84 108" fill="none" stroke="#C2AC8E" stroke-width="7" stroke-linecap="round"/>
+  <path d="M400 176 c62 0 104 52 104 110 0 64-44 108-84 108" fill="none" stroke="#C2AC8E" stroke-width="7" stroke-linecap="round"/>
+  <circle cx="400" cy="176" r="13" fill="#C2AC8E"/>
+
+  <!-- tapa de madera -->
+  <path d="M330 452 h140 a14 14 0 0 1 14 14 v46 a14 14 0 0 1-14 14 H330 a14 14 0 0 1-14-14 v-46 a14 14 0 0 1 14-14 Z" fill="url(#woodA)"/>
+  <g stroke="#95774F" stroke-width="2" opacity="0.45">
+    <line x1="322" y1="470" x2="478" y2="470"/>
+    <line x1="322" y1="500" x2="478" y2="500"/>
+  </g>
+
+  <!-- frasco -->
+  <path d="M318 528 h164 a22 22 0 0 1 22 22 v232 a40 40 0 0 1-40 40 H336 a40 40 0 0 1-40-40 V550 a22 22 0 0 1 22-22 Z" fill="url(#glassA)"/>
+  <ellipse cx="400" cy="529" rx="82" ry="10" fill="#FBF2E0" opacity="0.85"/>
+  <rect x="344" y="596" width="112" height="94" rx="3" fill="#F7EDDA" opacity="0.94"/>
+  <g stroke="#B49A78" stroke-width="2.2" opacity="0.8">
+    <line x1="366" y1="624" x2="434" y2="624"/>
+    <line x1="366" y1="642" x2="416" y2="642"/>
+    <line x1="366" y1="660" x2="428" y2="660"/>
+  </g>
+  <path d="M332 556 c-4 70-2 150 2 200" fill="none" stroke="#FFF8EA" stroke-opacity="0.45" stroke-width="9" stroke-linecap="round"/>
+
+  <!-- bruma -->
+  <g stroke="#C4A484" stroke-width="2.5" stroke-linecap="round" opacity="0.4">
+    <path d="M250 620 c-16-10-30-10-42 0"/>
+    <path d="M244 660 c-18 4-32 14-40 28"/>
+    <path d="M548 640 c16-10 30-10 42 0"/>
+  </g>
+</svg>

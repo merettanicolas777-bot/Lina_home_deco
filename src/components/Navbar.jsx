@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { createPortal } from 'react-dom'
 import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Menu, Search, ShoppingBag, X } from 'lucide-react'
@@ -36,6 +37,19 @@ export default function Navbar() {
   useEffect(() => {
     if (searchOpen) inputRef.current?.focus()
   }, [searchOpen])
+
+  useEffect(() => {
+    if (!mobileOpen) return
+    document.body.style.overflow = 'hidden'
+    const onKeyDown = (event) => {
+      if (event.key === 'Escape') setMobileOpen(false)
+    }
+    window.addEventListener('keydown', onKeyDown)
+    return () => {
+      document.body.style.overflow = ''
+      window.removeEventListener('keydown', onKeyDown)
+    }
+  }, [mobileOpen])
 
   const submitSearch = (event) => {
     event.preventDefault()
@@ -149,60 +163,72 @@ export default function Navbar() {
         </div>
       </div>
 
-      <AnimatePresence>
-        {mobileOpen && (
+      {mobileOpen &&
+        createPortal(
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 bg-cream md:hidden"
-          >
-            <div className="flex h-[72px] items-center justify-between px-5">
-              <Logo size="sm" />
-              <button
-                type="button"
-                onClick={() => setMobileOpen(false)}
-                aria-label="Cerrar menú"
-                className="grid h-10 w-10 place-items-center rounded-full border border-ink/10"
-              >
-                <X size={18} strokeWidth={1.6} />
-              </button>
-            </div>
-
-            <motion.nav
-              initial="hidden"
-              animate="visible"
-              variants={{ visible: { transition: { staggerChildren: 0.07, delayChildren: 0.1 } } }}
-              className="mt-10 flex flex-col gap-2 px-7"
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.28, ease: 'easeOut' }}
+              className="fixed inset-0 z-[60] flex flex-col overflow-y-auto bg-cream md:hidden"
             >
-              {links.map((link) => (
-                <motion.div
-                  key={link.to}
-                  variants={{ hidden: { opacity: 0, y: 14 }, visible: { opacity: 1, y: 0 } }}
+              <div className="flex h-[72px] shrink-0 items-center justify-between px-5">
+                <Link to="/" onClick={() => setMobileOpen(false)} aria-label="Lina Home & Deco">
+                  <Logo size="sm" />
+                </Link>
+                <button
+                  type="button"
+                  onClick={() => setMobileOpen(false)}
+                  aria-label="Cerrar menú"
+                  className="grid h-10 w-10 place-items-center rounded-full border border-ink/10 text-ink"
                 >
-                  <Link
-                    to={link.to}
-                    onClick={() => setMobileOpen(false)}
-                    className="block border-b border-ink/[0.07] py-4 font-serif text-3xl font-light"
-                  >
-                    {link.label}
-                  </Link>
-                </motion.div>
-              ))}
-            </motion.nav>
+                  <X size={18} strokeWidth={1.6} />
+                </button>
+              </div>
 
-            <div className="mt-10 px-7">
-              <Link
-                to="/admin"
-                onClick={() => setMobileOpen(false)}
-                className="text-[10px] uppercase tracking-[0.2em] text-muted"
+              <motion.nav
+                initial="hidden"
+                animate="visible"
+                variants={{ visible: { transition: { staggerChildren: 0.07, delayChildren: 0.1 } } }}
+                className="mt-8 flex flex-col gap-1 px-7 sm:mt-12"
               >
-                Panel de administración
-              </Link>
-            </div>
-          </motion.div>
+                {links.map((link) => (
+                  <motion.div
+                    key={link.to}
+                    variants={{ hidden: { opacity: 0, y: 14 }, visible: { opacity: 1, y: 0 } }}
+                  >
+                    <Link
+                      to={link.to}
+                      onClick={() => setMobileOpen(false)}
+                      className="block border-b border-ink/[0.07] py-4 font-serif text-3xl font-light"
+                    >
+                      {link.label}
+                    </Link>
+                  </motion.div>
+                ))}
+              </motion.nav>
+
+              <div className="mt-auto flex items-center justify-between gap-4 px-7 pb-10 pt-8">
+                <Link
+                  to="/admin"
+                  onClick={() => setMobileOpen(false)}
+                  className="text-[10px] uppercase tracking-[0.2em] text-muted"
+                >
+                  Panel de administración
+                </Link>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setMobileOpen(false)
+                    openCart()
+                  }}
+                  className="text-[10px] uppercase tracking-[0.2em] text-clay"
+                >
+                  Ver carrito
+                </button>
+              </div>
+          </motion.div>,
+          document.body,
         )}
-      </AnimatePresence>
     </header>
   )
 }

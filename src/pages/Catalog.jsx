@@ -70,8 +70,7 @@ export default function Catalog() {
           Catálogo
         </h1>
         <p className="mt-4 max-w-lg text-sm leading-relaxed text-muted">
-          Aromas y objetos para cada rincón: desde una vela para la mesa de luz hasta el difusor del
-          living.
+          Aromas para cada rincón: desde una vela para la mesa de luz hasta el difusor del auto.
         </p>
       </motion.header>
 

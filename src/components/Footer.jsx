@@ -12,7 +12,7 @@ export default function Footer() {
         <div>
           <Logo size="md" />
           <p className="mt-6 max-w-xs text-sm leading-relaxed text-muted">
-            Velas de soja, difusores y objetos elegidos uno por uno para que tu casa huela a calma.
+            Velas de soja, difusores y brumas elegidas una por una para que tu casa huela a calma.
             Hecho a mano, en pequeños lotes.
           </p>
           <div className="mt-6 flex gap-3">
@@ -58,13 +58,21 @@ export default function Footer() {
               </Link>
             </li>
             <li>
-              <Link to="/catalogo?categoria=Difusores" className="transition hover:text-ink">
-                Difusores
+              <Link
+                to="/catalogo?categoria=Difusores%20de%20Varillas"
+                className="transition hover:text-ink"
+              >
+                Difusores de varillas
               </Link>
             </li>
             <li>
-              <Link to="/catalogo?categoria=Deco" className="transition hover:text-ink">
-                Objetos deco
+              <Link to="/catalogo?categoria=Home%20Sprays" className="transition hover:text-ink">
+                Home sprays
+              </Link>
+            </li>
+            <li>
+              <Link to="/catalogo?categoria=Body%20Splash" className="transition hover:text-ink">
+                Body splash
               </Link>
             </li>
           </ul>

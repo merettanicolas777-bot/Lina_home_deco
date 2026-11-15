@@ -1,7 +1,7 @@
 import { supabase, isSupabaseConfigured } from './supabase'
 import { DEMO_PRODUCTS } from './demoData'
 
-const DEMO_KEY = 'lina:demo-products'
+const DEMO_KEY = 'lina:demo-products-v2'
 export const IMAGE_BUCKET = 'product-images'
 
 function readDemo() {

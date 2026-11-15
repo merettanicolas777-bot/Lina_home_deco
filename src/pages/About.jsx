@@ -41,8 +41,8 @@ export default function About() {
           </p>
           <p className="mt-4 max-w-lg text-sm leading-relaxed text-muted">
             Empezamos con tres velas para regalar a amigas. Hoy diseñamos una colección completa de
-            aromas para el hogar —velas, difusores de varillas, home sprays— junto a piezas
-            decorativas de cerámica y madera que elegimos en talleres locales.
+            aromas para el hogar y para llevar: velas, difusores de varillas y de auto, home sprays,
+            body splash y perfumes de cartera.
           </p>
           <p className="mt-4 max-w-lg text-sm leading-relaxed text-muted">
             Seguimos siendo un equipo chico: cada pedido lo preparamos nosotros, con papel de seda,

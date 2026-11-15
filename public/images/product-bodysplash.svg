@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" width="800" height="1000" role="img" aria-label="Body splash">
+  <defs>
+    <linearGradient id="bgB" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FBF7F0"/>
+      <stop offset="1" stop-color="#E7DCCB"/>
+    </linearGradient>
+    <linearGradient id="glassB" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#D9C8AF"/>
+      <stop offset="0.4" stop-color="#FDF8EF"/>
+      <stop offset="1" stop-color="#C6B295"/>
+    </linearGradient>
+    <linearGradient id="liquidB" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#EAD9BC"/>
+      <stop offset="1" stop-color="#D6BE9B"/>
+    </linearGradient>
+    <linearGradient id="capB" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#B99C74"/>
+      <stop offset="0.5" stop-color="#E2CBA8"/>
+      <stop offset="1" stop-color="#9C7C52"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="800" height="1000" fill="url(#bgB)"/>
+  <circle cx="400" cy="540" r="280" fill="#FFFFFF" opacity="0.35"/>
+  <ellipse cx="400" cy="866" rx="140" ry="18" fill="#A98E6C" opacity="0.22"/>
+
+  <!-- frasco esbelto -->
+  <path d="M318 420 h164 c16 0 26 12 26 28 v372 c0 26-18 42-44 42 H336 c-26 0-44-16-44-42 V448 c0-16 10-28 26-28 Z" fill="url(#glassB)"/>
+  <path d="M320 560 h160 v260 c0 18-12 30-30 30 H350 c-18 0-30-12-30-30 Z" fill="url(#liquidB)" opacity="0.65"/>
+
+  <!-- cuello y tapa -->
+  <rect x="358" y="366" width="84" height="58" rx="8" fill="#E6DAC6"/>
+  <rect x="346" y="300" width="108" height="76" rx="14" fill="url(#capB)"/>
+  <rect x="352" y="286" width="96" height="22" rx="8" fill="#C9AE86"/>
+
+  <!-- etiqueta -->
+  <rect x="340" y="628" width="120" height="140" rx="4" fill="#F9F2E5" opacity="0.95"/>
+  <g stroke="#B49A78" stroke-width="2.2" opacity="0.75">
+    <line x1="362" y1="672" x2="438" y2="672"/>
+    <line x1="362" y1="692" x2="418" y2="692"/>
+    <line x1="362" y1="712" x2="430" y2="712"/>
+    <line x1="362" y1="736" x2="404" y2="736"/>
+  </g>
+  <path d="M330 460 c-4 90-4 220 0 300" fill="none" stroke="#FFFDF8" stroke-opacity="0.55" stroke-width="10" stroke-linecap="round"/>
+
+  <!-- gotas -->
+  <g fill="#C4A484" opacity="0.35">
+    <circle cx="246" cy="470" r="6"/>
+    <circle cx="212" cy="530" r="4"/>
+    <circle cx="556" cy="502" r="5"/>
+    <circle cx="588" cy="572" r="3"/>
+  </g>
+</svg>

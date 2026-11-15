@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" width="800" height="1000" role="img" aria-label="Perfume de cartera">
+  <defs>
+    <linearGradient id="bgC" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FAF6EE"/>
+      <stop offset="1" stop-color="#E8DDCB"/>
+    </linearGradient>
+    <linearGradient id="glassC" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#C49F6E"/>
+      <stop offset="0.38" stop-color="#F3E2C4"/>
+      <stop offset="0.72" stop-color="#C6A173"/>
+      <stop offset="1" stop-color="#A5825A"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#B4915C"/>
+      <stop offset="0.45" stop-color="#E7D0A5"/>
+      <stop offset="1" stop-color="#A2803F"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="800" height="1000" fill="url(#bgC)"/>
+  <circle cx="400" cy="540" r="270" fill="#FFFFFF" opacity="0.35"/>
+  <ellipse cx="400" cy="816" rx="150" ry="20" fill="#A98E6C" opacity="0.22"/>
+
+  <!-- cadena -->
+  <path d="M400 262 c-70 0-114 42-114 94" fill="none" stroke="#C9AE86" stroke-width="6" stroke-linecap="round"/>
+  <g fill="#D8BF97">
+    <circle cx="292" cy="372" r="7"/>
+    <circle cx="306" cy="398" r="7"/>
+    <circle cx="326" cy="420" r="7"/>
+  </g>
+
+  <!-- tapa dorada -->
+  <rect x="342" y="330" width="116" height="34" rx="8" fill="url(#gold)"/>
+  <rect x="356" y="364" width="88" height="44" rx="6" fill="#C2A379"/>
+
+  <!-- flacon -->
+  <path d="M306 436 h188 a26 26 0 0 1 26 26 v250 a34 34 0 0 1-34 34 H314 a34 34 0 0 1-34-34 V462 a26 26 0 0 1 26-26 Z" fill="url(#glassC)"/>
+  <path d="M314 502 h172 v210 a26 26 0 0 1-26 26 H340 a26 26 0 0 1-26-26 Z" fill="#EBD7B4" opacity="0.55"/>
+  <rect x="336" y="536" width="128" height="120" rx="4" fill="#F8EFDE" opacity="0.94"/>
+  <g stroke="#B49A78" stroke-width="2.2" opacity="0.8">
+    <line x1="360" y1="578" x2="440" y2="578"/>
+    <line x1="360" y1="598" x2="418" y2="598"/>
+    <line x1="360" y1="618" x2="432" y2="618"/>
+  </g>
+  <path d="M320 470 c-4 80-4 160 0 210" fill="none" stroke="#FFF8EA" stroke-opacity="0.5" stroke-width="9" stroke-linecap="round"/>
+
+  <!-- atomizador -->
+  <rect x="486" y="392" width="34" height="22" rx="6" fill="#D8C2A0"/>
+  <g stroke="#C4A484" stroke-width="2.5" stroke-linecap="round" opacity="0.45">
+    <path d="M540 392 c14-8 24-20 26-34"/>
+    <path d="M556 410 c16-4 28-14 34-26"/>
+  </g>
+</svg>

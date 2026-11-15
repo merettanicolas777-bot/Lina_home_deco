@@ -68,8 +68,8 @@ export default function Home() {
               transition={{ duration: 0.7, delay: 0.16 }}
               className="mt-6 max-w-md text-[15px] leading-relaxed text-muted"
             >
-              Velas de soja, difusores de varillas y objetos elegidos a mano para transformar lo
-              cotidiano en un pequeño ritual de calma.
+              Velas de soja, difusores de varillas y home sprays para transformar lo cotidiano en un
+              pequeño ritual de calma.
             </motion.p>
 
             <motion.div
@@ -193,9 +193,8 @@ export default function Home() {
             </h2>
             <p className="mt-5 max-w-lg text-sm leading-relaxed text-muted">
               Empezamos derritiendo soja en la cocina de casa, buscando ese aroma que abraza al
-              volver del trabajo. Hoy cada vela, difusor y objeto sigue pasando por nuestras manos:
-              elegimos las fragancias, probamos las mechas y cuidamos el packaging como si fuera un
-              regalo.
+              volver del trabajo.               Hoy cada vela, difusor y bruma sigue pasando por nuestras manos: elegimos las
+              fragancias, probamos las mechas y cuidamos el packaging como si fuera un regalo.
             </p>
             <Link to="/sobre-nosotros" className="btn-primary mt-8">
               Conocer más

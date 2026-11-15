@@ -50,6 +50,11 @@ export default function ProductForm({ open, product, onClose, onSubmit }) {
     return () => window.removeEventListener('keydown', onKeyDown)
   }, [open, onClose])
 
+  // Mantiene visible una categoría antigua al editar productos ya cargados.
+  const categoryOptions = CATEGORIES.includes(values.category)
+    ? CATEGORIES
+    : [values.category, ...CATEGORIES]
+
   const handleFile = (event) => {
     const selected = event.target.files?.[0]
     if (!selected) return
@@ -188,7 +193,7 @@ export default function ProductForm({ open, product, onClose, onSubmit }) {
                       }
                       className="field appearance-none"
                     >
-                      {CATEGORIES.map((category) => (
+                      {categoryOptions.map((category) => (
                         <option key={category} value={category}>
                           {category}
                         </option>
