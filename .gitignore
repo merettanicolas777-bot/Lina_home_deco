@@ -5,6 +5,7 @@ dist-ssr
 .env
 .env.local
 .env.*.local
+.supabase-token
 .DS_Store
 .vscode/*
 !.vscode/extensions.json

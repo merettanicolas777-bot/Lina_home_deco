@@ -124,13 +124,23 @@ function normalizePayload(values) {
 const needsImagesColumn = (message = '') =>
   /images/i.test(message) && /(column|schema|cache)/i.test(message)
 
+const MISSING_COLUMN_ERROR =
+  'La base todavía no tiene la columna para varias fotos. Ejecutá supabase/product-images.sql en el SQL Editor de Supabase y volvé a guardar (las fotos ya subidas quedan en el bucket).'
+
+/** Mientras no exista la columna `images`, solo se puede guardar una foto. */
+function withoutImagesColumn(payload) {
+  if (payload.images.length > 1) throw new Error(MISSING_COLUMN_ERROR)
+  const { images, ...rest } = payload
+  return { rest, images }
+}
+
 async function insertProduct(payload) {
   const { data, error } = await supabase.from('products').insert(payload).select().single()
 
   if (error) {
     // Respaldo por si todavía no se corrió la migración de `images`.
     if (needsImagesColumn(error.message)) {
-      const { images, ...rest } = payload
+      const { rest, images } = withoutImagesColumn(payload)
       const retry = await supabase.from('products').insert(rest).select().single()
       if (retry.error) throw new Error(retry.error.message)
       return { ...retry.data, images }
@@ -151,7 +161,7 @@ async function updateProductRow(id, payload) {
 
   if (error) {
     if (needsImagesColumn(error.message)) {
-      const { images, ...rest } = payload
+      const { rest, images } = withoutImagesColumn(payload)
       const retry = await supabase.from('products').update(rest).eq('id', id).select().single()
       if (retry.error) throw new Error(retry.error.message)
       return { ...retry.data, images }
