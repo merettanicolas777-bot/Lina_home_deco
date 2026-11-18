@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { ArrowLeft, Eye, EyeOff, ShieldCheck } from 'lucide-react'
 import Logo from '../components/Logo'
+import InstallApp, { usePanelManifest } from '../components/InstallApp'
 import { Spinner } from '../components/Skeleton'
 import { useAuth } from '../context/AuthContext'
 import { isSupabaseConfigured } from '../lib/supabase'
@@ -18,6 +19,8 @@ export default function Login() {
   const [submitting, setSubmitting] = useState(false)
 
   const redirectTo = location.state?.from ?? '/admin'
+
+  usePanelManifest(true)
 
   useEffect(() => {
     if (!loading && isAuthenticated) navigate(redirectTo, { replace: true })
@@ -142,6 +145,16 @@ export default function Login() {
           <p className="mt-6 text-center text-[11px] leading-relaxed text-muted/80">
             Acceso exclusivo para la administración de Lina Home &amp; Deco.
           </p>
+
+          <div className="mt-6 border-t border-ink/[0.07] pt-5">
+            <p className="text-[11px] leading-relaxed text-muted">
+              ¿Gestionás la tienda desde el celular? Instalá el panel como app y abrilo desde el
+              ícono, en pantalla completa.
+            </p>
+            <div className="mt-3">
+              <InstallApp />
+            </div>
+          </div>
         </motion.div>
       </div>
     </div>

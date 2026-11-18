@@ -14,6 +14,7 @@ import {
   X,
 } from 'lucide-react'
 import Logo from '../components/Logo'
+import InstallApp, { usePanelManifest } from '../components/InstallApp'
 import ProductForm from '../components/admin/ProductForm'
 import { PageLoader, Skeleton } from '../components/Skeleton'
 import { useAuth } from '../context/AuthContext'
@@ -29,6 +30,7 @@ import { formatARS } from '../utils/format'
 
 export default function Admin() {
   const { user, signOut } = useAuth()
+  usePanelManifest(true)
   const [products, setProducts] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
@@ -159,6 +161,7 @@ export default function Admin() {
               Ver tienda
               <ExternalLink size={12} strokeWidth={1.8} />
             </Link>
+            <InstallApp compact />
             <span className="hidden max-w-[160px] truncate text-[11px] text-muted sm:block">
               {user?.email}
             </span>
