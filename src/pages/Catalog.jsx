@@ -6,6 +6,7 @@ import { fetchProducts } from '../lib/products'
 import { CATEGORIES } from '../lib/demoData'
 import ProductCard from '../components/ProductCard'
 import { ProductGridSkeleton } from '../components/Skeleton'
+import { container } from '../lib/motion'
 
 const FILTERS = ['Todos', ...CATEGORIES]
 
@@ -159,11 +160,17 @@ export default function Catalog() {
             </button>
           </div>
         ) : filtered.length ? (
-          <div className="grid grid-cols-2 gap-x-3.5 gap-y-5 sm:gap-x-6 sm:gap-y-7 lg:grid-cols-3 lg:gap-y-8">
-            {filtered.map((product, index) => (
-              <ProductCard key={product.id} product={product} index={index} />
+          <motion.div
+            key={`${activeCategory}-${query}`}
+            initial="hidden"
+            animate="visible"
+            variants={container(0, 0.06)}
+            className="grid grid-cols-2 gap-x-3.5 gap-y-5 sm:gap-x-6 sm:gap-y-7 lg:grid-cols-3 lg:gap-y-8"
+          >
+            {filtered.map((product) => (
+              <ProductCard key={product.id} product={product} />
             ))}
-          </div>
+          </motion.div>
         ) : (
           <div className="rounded-2xl border border-dashed border-ink/15 px-6 py-20 text-center">
             <p className="font-serif text-2xl">Sin resultados</p>

@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { Outlet, Route, Routes, useLocation } from 'react-router-dom'
-import { AnimatePresence, motion } from 'framer-motion'
+import { AnimatePresence, MotionConfig, motion } from 'framer-motion'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import CartDrawer from './components/CartDrawer'
@@ -31,10 +31,10 @@ function PublicLayout() {
         <AnimatePresence mode="wait" initial={false}>
           <motion.div
             key={location.pathname}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.22, ease: 'easeOut' }}
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -6 }}
+            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
           >
             <Outlet />
           </motion.div>
@@ -47,7 +47,7 @@ function PublicLayout() {
 
 export default function App() {
   return (
-    <>
+    <MotionConfig reducedMotion="user">
       <ScrollToTop />
       <Routes>
         <Route element={<PublicLayout />}>
@@ -70,6 +70,6 @@ export default function App() {
       </Routes>
 
       <CartDrawer />
-    </>
+    </MotionConfig>
   )
 }

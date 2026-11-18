@@ -6,6 +6,8 @@ import { Menu, Search, ShoppingBag, X } from 'lucide-react'
 import Logo from './Logo'
 import { useCart } from '../context/CartContext'
 
+const EASE_OUT = [0.16, 1, 0.3, 1]
+
 const links = [
   { to: '/', label: 'Inicio' },
   { to: '/catalogo', label: 'Catálogo' },
@@ -19,14 +21,26 @@ export default function Navbar() {
   const [searchOpen, setSearchOpen] = useState(false)
   const [term, setTerm] = useState('')
   const inputRef = useRef(null)
+  const progressRef = useRef(null)
   const navigate = useNavigate()
   const location = useLocation()
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12)
+    const onScroll = () => {
+      setScrolled(window.scrollY > 12)
+
+      const max = document.documentElement.scrollHeight - window.innerHeight
+      const value = max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0
+      if (progressRef.current) progressRef.current.style.transform = `scaleX(${value})`
+    }
+
     onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
+    window.addEventListener('resize', onScroll)
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      window.removeEventListener('resize', onScroll)
+    }
   }, [])
 
   useEffect(() => {
@@ -67,6 +81,13 @@ export default function Navbar() {
           : 'border-b border-transparent bg-cream/70 backdrop-blur-sm'
       }`}
     >
+      <div
+        ref={progressRef}
+        style={{ transform: 'scaleX(0)' }}
+        className="absolute inset-x-0 bottom-0 z-10 h-[1.5px] origin-left bg-clay/60"
+        aria-hidden="true"
+      />
+
       <div className="mx-auto flex h-[72px] max-w-7xl items-center justify-between px-5 sm:px-8 lg:h-[86px]">
         <Link to="/" aria-label="Lina Home & Deco — inicio" className="shrink-0">
           <Logo />
@@ -168,7 +189,7 @@ export default function Navbar() {
           <motion.div
             initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.28, ease: 'easeOut' }}
+                          transition={{ duration: 0.32, ease: EASE_OUT }}
               className="fixed inset-0 z-[60] flex flex-col overflow-y-auto bg-cream md:hidden"
             >
               <div className="flex h-[72px] shrink-0 items-center justify-between px-5">

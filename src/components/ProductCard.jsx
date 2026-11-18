@@ -1,19 +1,14 @@
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { formatARS } from '../utils/format'
+import { fadeUp } from '../lib/motion'
 
-export default function ProductCard({ product, index = 0 }) {
+export default function ProductCard({ product }) {
   return (
-    <motion.article
-      initial={{ opacity: 0, y: 18 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-40px' }}
-      transition={{ duration: 0.5, delay: Math.min(index * 0.06, 0.3), ease: 'easeOut' }}
-      className="h-full"
-    >
+    <motion.article variants={fadeUp} className="h-full">
       <Link
         to={`/producto/${product.id}`}
-        className="group flex h-full flex-col rounded-[18px] border border-ink/[0.07] bg-white/70 p-2.5 transition duration-300 hover:-translate-y-0.5 hover:border-clay/35 hover:bg-white hover:shadow-card sm:p-3"
+        className="group flex h-full flex-col rounded-[18px] border border-ink/[0.07] bg-white/70 p-2.5 transition duration-300 hover:-translate-y-1 hover:border-clay/35 hover:bg-white hover:shadow-card sm:p-3"
       >
         <div className="relative overflow-hidden rounded-[12px] bg-beige">
           <div className="aspect-[4/5] w-full">
@@ -21,7 +16,7 @@ export default function ProductCard({ product, index = 0 }) {
               src={product.image_url || '/images/product-vela.svg'}
               alt={product.name}
               loading="lazy"
-              className={`h-full w-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.03] ${
+              className={`h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04] ${
                 product.in_stock ? '' : 'opacity-60 saturate-[0.7]'
               }`}
             />

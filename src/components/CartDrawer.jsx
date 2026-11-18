@@ -91,7 +91,7 @@ export default function CartDrawer() {
             initial={{ x: '100%' }}
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
-            transition={{ type: 'tween', duration: 0.45, ease: [0.32, 0.72, 0, 1] }}
+            transition={{ type: 'spring', stiffness: 320, damping: 34, mass: 0.9 }}
             className="absolute right-0 top-0 flex h-full w-full max-w-[440px] flex-col bg-cream shadow-2xl"
           >
             <header className="flex items-center justify-between border-b border-ink/[0.07] px-6 py-5">
@@ -133,9 +133,10 @@ export default function CartDrawer() {
                         <motion.li
                           key={item.id}
                           layout
-                          initial={{ opacity: 0, y: 8 }}
+                          initial={{ opacity: 0, y: 10 }}
                           animate={{ opacity: 1, y: 0 }}
-                          exit={{ opacity: 0, x: 24 }}
+                          exit={{ opacity: 0, x: 28 }}
+                          transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
                           className="flex gap-4"
                         >
                           <div className="h-24 w-20 shrink-0 overflow-hidden rounded-xl bg-beige">
