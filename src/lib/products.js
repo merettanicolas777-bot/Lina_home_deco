@@ -56,7 +56,7 @@ export async function fetchProduct(id) {
   return data
 }
 
-/** Sube la imagen al bucket público y devuelve su URL. */
+/** Sube una imagen al bucket público y devuelve su URL. */
 export async function uploadProductImage(file) {
   if (!file) return null
 
@@ -78,7 +78,7 @@ export async function uploadProductImage(file) {
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/(^-|-$)/g, '')
 
-  const path = `${Date.now()}-${safeName || 'producto'}.${extension}`
+  const path = `${Date.now()}-${Math.random().toString(36).slice(2, 7)}-${safeName || 'producto'}.${extension}`
 
   const { error } = await supabase.storage.from(IMAGE_BUCKET).upload(path, file, {
     cacheControl: '3600',
@@ -91,54 +91,57 @@ export async function uploadProductImage(file) {
   return data.publicUrl
 }
 
+/** Resuelve las fotos en el orden elegido: sube las nuevas y conserva las existentes. */
+export async function resolveImages(entries = []) {
+  const urls = []
+
+  for (const entry of entries) {
+    if (entry?.file) {
+      const uploaded = await uploadProductImage(entry.file)
+      if (uploaded) urls.push(uploaded)
+    } else if (entry?.url) {
+      urls.push(entry.url)
+    }
+  }
+
+  return urls
+}
+
 function normalizePayload(values) {
+  const images = Array.isArray(values.images) ? values.images.filter(Boolean) : []
+
   return {
     name: values.name.trim(),
     description: values.description?.trim() ?? '',
     price: Number(values.price) || 0,
     category: values.category,
     in_stock: Boolean(values.in_stock),
-    ...(values.image_url ? { image_url: values.image_url } : {}),
+    image_url: images[0] ?? null,
+    images,
   }
 }
 
-export async function createProduct(values, imageFile) {
-  const uploadedUrl = await uploadProductImage(imageFile)
-  const payload = normalizePayload({ ...values, image_url: uploadedUrl })
+const needsImagesColumn = (message = '') =>
+  /images/i.test(message) && /(column|schema|cache)/i.test(message)
 
-  if (!isSupabaseConfigured) {
-    const product = {
-      ...payload,
-      id: `local-${Date.now()}`,
-      image_url: uploadedUrl || values.image_url || '/images/product-vela.svg',
-      created_at: new Date().toISOString(),
+async function insertProduct(payload) {
+  const { data, error } = await supabase.from('products').insert(payload).select().single()
+
+  if (error) {
+    // Respaldo por si todavía no se corrió la migración de `images`.
+    if (needsImagesColumn(error.message)) {
+      const { images, ...rest } = payload
+      const retry = await supabase.from('products').insert(rest).select().single()
+      if (retry.error) throw new Error(retry.error.message)
+      return { ...retry.data, images }
     }
-    writeDemo([product, ...readDemo()])
-    return product
+    throw new Error(error.message)
   }
 
-  const { data, error } = await supabase
-    .from('products')
-    .insert(payload)
-    .select()
-    .single()
-
-  if (error) throw new Error(error.message)
   return data
 }
 
-export async function updateProduct(id, values, imageFile) {
-  const uploadedUrl = await uploadProductImage(imageFile)
-  const payload = normalizePayload({ ...values, image_url: uploadedUrl || values.image_url })
-
-  if (!isSupabaseConfigured) {
-    const rows = readDemo().map((p) =>
-      p.id === id ? { ...p, ...payload, image_url: uploadedUrl || p.image_url } : p,
-    )
-    writeDemo(rows)
-    return rows.find((p) => p.id === id)
-  }
-
+async function updateProductRow(id, payload) {
   const { data, error } = await supabase
     .from('products')
     .update(payload)
@@ -146,8 +149,50 @@ export async function updateProduct(id, values, imageFile) {
     .select()
     .single()
 
-  if (error) throw new Error(error.message)
+  if (error) {
+    if (needsImagesColumn(error.message)) {
+      const { images, ...rest } = payload
+      const retry = await supabase.from('products').update(rest).eq('id', id).select().single()
+      if (retry.error) throw new Error(retry.error.message)
+      return { ...retry.data, images }
+    }
+    throw new Error(error.message)
+  }
+
   return data
+}
+
+export async function createProduct(values, entries = []) {
+  const images = await resolveImages(entries)
+  const payload = normalizePayload({ ...values, images })
+
+  if (!isSupabaseConfigured) {
+    const product = {
+      ...payload,
+      id: `local-${Date.now()}`,
+      image_url: images[0] ?? '/images/product-vela.svg',
+      created_at: new Date().toISOString(),
+    }
+    writeDemo([product, ...readDemo()])
+    return product
+  }
+
+  return insertProduct(payload)
+}
+
+export async function updateProduct(id, values, entries = []) {
+  const images = await resolveImages(entries)
+  const payload = normalizePayload({ ...values, images })
+
+  if (!isSupabaseConfigured) {
+    const rows = readDemo().map((product) =>
+      product.id === id ? { ...product, ...payload } : product,
+    )
+    writeDemo(rows)
+    return rows.find((product) => product.id === id)
+  }
+
+  return updateProductRow(id, payload)
 }
 
 export async function setProductStock(id, inStock) {

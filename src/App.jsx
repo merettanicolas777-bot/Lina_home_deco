@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { Outlet, Route, Routes, useLocation } from 'react-router-dom'
-import { AnimatePresence, MotionConfig, motion } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import CartDrawer from './components/CartDrawer'
@@ -47,7 +47,7 @@ function PublicLayout() {
 
 export default function App() {
   return (
-    <MotionConfig reducedMotion="user">
+    <>
       <ScrollToTop />
       <Routes>
         <Route element={<PublicLayout />}>
@@ -70,6 +70,6 @@ export default function App() {
       </Routes>
 
       <CartDrawer />
-    </MotionConfig>
+    </>
   )
 }

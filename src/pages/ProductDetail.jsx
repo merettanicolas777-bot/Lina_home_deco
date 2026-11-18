@@ -1,7 +1,17 @@
 import { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
-import { motion } from 'framer-motion'
-import { ArrowLeft, Check, Gift, Minus, Package, Plus, Truck } from 'lucide-react'
+import { AnimatePresence, motion } from 'framer-motion'
+import {
+  ArrowLeft,
+  Check,
+  ChevronLeft,
+  ChevronRight,
+  Gift,
+  Minus,
+  Package,
+  Plus,
+  Truck,
+} from 'lucide-react'
 import { fetchProduct } from '../lib/products'
 import { useCart } from '../context/CartContext'
 import { formatARS } from '../utils/format'
@@ -17,6 +27,7 @@ export default function ProductDetail() {
   const [error, setError] = useState('')
   const [quantity, setQuantity] = useState(1)
   const [added, setAdded] = useState(false)
+  const [active, setActive] = useState(0)
 
   useEffect(() => {
     let active = true
@@ -29,6 +40,7 @@ export default function ProductDetail() {
         if (!active) return
         if (!data) setError('No encontramos este producto.')
         setProduct(data)
+        setActive(0)
       })
       .catch((err) => active && setError(err.message || 'No pudimos cargar el producto.'))
       .finally(() => active && setLoading(false))
@@ -76,6 +88,11 @@ export default function ProductDetail() {
     )
   }
 
+  const images = (product.images?.length ? product.images : [product.image_url]).filter(Boolean)
+  const gallery = images.length ? images : ['/images/product-vela.svg']
+  const goTo = (index) =>
+    setActive(((index % gallery.length) + gallery.length) % gallery.length)
+
   const paragraphs = (product.description || '').split('\n').filter(Boolean)
 
   return (
@@ -96,13 +113,87 @@ export default function ProductDetail() {
           transition={{ duration: 0.6, ease: 'easeOut' }}
           className="relative"
         >
-          <div className="overflow-hidden rounded-[24px] bg-beige">
-            <img
-              src={product.image_url || '/images/product-vela.svg'}
-              alt={product.name}
-              className="aspect-[4/5] w-full object-cover"
-            />
+          <div className="relative overflow-hidden rounded-[24px] bg-beige">
+            <div className="aspect-[4/5] w-full overflow-hidden">
+              <AnimatePresence mode="wait" initial={false}>
+                <motion.img
+                  key={active}
+                  src={gallery[active]}
+                  alt={`${product.name} — foto ${active + 1} de ${gallery.length}`}
+                  initial={{ opacity: 0, scale: 1.03 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+                  drag={gallery.length > 1 ? 'x' : false}
+                  dragConstraints={{ left: 0, right: 0 }}
+                  dragElastic={0.12}
+                  onDragEnd={(_event, info) => {
+                    if (info.offset.x < -60) goTo(active + 1)
+                    else if (info.offset.x > 60) goTo(active - 1)
+                  }}
+                  className={`h-full w-full object-cover ${
+                    gallery.length > 1 ? 'cursor-grab active:cursor-grabbing' : ''
+                  }`}
+                />
+              </AnimatePresence>
+            </div>
+
+            {gallery.length > 1 && (
+              <>
+                <button
+                  type="button"
+                  onClick={() => goTo(active - 1)}
+                  aria-label="Foto anterior"
+                  className="absolute left-3 top-1/2 grid h-10 w-10 -translate-y-1/2 place-items-center rounded-full bg-cream/85 text-ink shadow-soft backdrop-blur transition hover:bg-cream"
+                >
+                  <ChevronLeft size={17} strokeWidth={1.6} />
+                </button>
+                <button
+                  type="button"
+                  onClick={() => goTo(active + 1)}
+                  aria-label="Foto siguiente"
+                  className="absolute right-3 top-1/2 grid h-10 w-10 -translate-y-1/2 place-items-center rounded-full bg-cream/85 text-ink shadow-soft backdrop-blur transition hover:bg-cream"
+                >
+                  <ChevronRight size={17} strokeWidth={1.6} />
+                </button>
+                <div className="absolute bottom-4 left-1/2 flex -translate-x-1/2 gap-1.5">
+                  {gallery.map((image, index) => (
+                    <button
+                      key={image + index}
+                      type="button"
+                      onClick={() => goTo(index)}
+                      aria-label={`Ir a la foto ${index + 1}`}
+                      aria-current={index === active}
+                      className={`h-1.5 rounded-full transition-all ${
+                        index === active ? 'w-6 bg-cream' : 'w-1.5 bg-cream/60 hover:bg-cream/80'
+                      }`}
+                    />
+                  ))}
+                </div>
+              </>
+            )}
           </div>
+
+          {gallery.length > 1 && (
+            <div className="no-scrollbar mt-3 flex gap-2.5 overflow-x-auto pb-1">
+              {gallery.map((image, index) => (
+                <button
+                  key={image + index}
+                  type="button"
+                  onClick={() => goTo(index)}
+                  aria-label={`Ver foto ${index + 1}`}
+                  aria-current={index === active}
+                  className={`relative h-20 w-16 shrink-0 overflow-hidden rounded-lg border transition ${
+                    index === active
+                      ? 'border-clay opacity-100'
+                      : 'border-transparent opacity-65 hover:opacity-100'
+                  }`}
+                >
+                  <img src={image} alt="" className="h-full w-full object-cover" />
+                </button>
+              ))}
+            </div>
+          )}
           <div className="mt-4 grid grid-cols-3 gap-3">
             {[
               { icon: Gift, label: 'Para regalar' },

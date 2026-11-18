@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
-import { ImagePlus, Upload, X } from 'lucide-react'
+import { ImagePlus, Plus, Upload, X } from 'lucide-react'
 import { CATEGORIES } from '../../lib/demoData'
 import { Spinner } from '../Skeleton'
 
@@ -10,19 +10,19 @@ const EMPTY = {
   price: '',
   category: CATEGORIES[0],
   in_stock: true,
-  image_url: '',
 }
 
 export default function ProductForm({ open, product, onClose, onSubmit }) {
   const [values, setValues] = useState(EMPTY)
-  const [file, setFile] = useState(null)
-  const [preview, setPreview] = useState('')
+  const [entries, setEntries] = useState([])
   const [errors, setErrors] = useState({})
   const [saving, setSaving] = useState(false)
   const fileRef = useRef(null)
+  const objectUrls = useRef([])
 
   useEffect(() => {
     if (!open) return
+
     setValues(
       product
         ? {
@@ -31,15 +31,27 @@ export default function ProductForm({ open, product, onClose, onSubmit }) {
             price: String(product.price ?? ''),
             category: product.category ?? CATEGORIES[0],
             in_stock: product.in_stock ?? true,
-            image_url: product.image_url ?? '',
           }
         : EMPTY,
     )
-    setFile(null)
-    setPreview(product?.image_url ?? '')
+
+    const savedImages = product
+      ? product.images?.length
+        ? product.images
+        : [product.image_url].filter(Boolean)
+      : []
+
+    setEntries(savedImages.map((url, index) => ({ key: `saved-${index}-${url}`, url })))
     setErrors({})
     setSaving(false)
   }, [open, product])
+
+  // Libera los objetos temporales al cerrar el formulario.
+  useEffect(() => {
+    if (open) return
+    objectUrls.current.forEach((url) => URL.revokeObjectURL(url))
+    objectUrls.current = []
+  }, [open])
 
   useEffect(() => {
     if (!open) return
@@ -55,11 +67,34 @@ export default function ProductForm({ open, product, onClose, onSubmit }) {
     ? CATEGORIES
     : [values.category, ...CATEGORIES]
 
-  const handleFile = (event) => {
-    const selected = event.target.files?.[0]
-    if (!selected) return
-    setFile(selected)
-    setPreview(URL.createObjectURL(selected))
+  const handleFiles = (event) => {
+    const selected = Array.from(event.target.files ?? [])
+    if (!selected.length) return
+
+    const next = selected.map((file) => {
+      const url = URL.createObjectURL(file)
+      objectUrls.current.push(url)
+      return { key: `new-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`, url, file }
+    })
+
+    setEntries((current) => [...current, ...next])
+    event.target.value = ''
+  }
+
+  const removeEntry = (key) => {
+    setEntries((current) => {
+      const target = current.find((entry) => entry.key === key)
+      if (target?.file) URL.revokeObjectURL(target.url)
+      return current.filter((entry) => entry.key !== key)
+    })
+  }
+
+  const makeCover = (key) => {
+    setEntries((current) => {
+      const target = current.find((entry) => entry.key === key)
+      if (!target) return current
+      return [target, ...current.filter((entry) => entry.key !== key)]
+    })
   }
 
   const handleSubmit = async (event) => {
@@ -77,7 +112,7 @@ export default function ProductForm({ open, product, onClose, onSubmit }) {
 
     setSaving(true)
     try {
-      await onSubmit(values, file)
+      await onSubmit(values, entries)
       onClose()
     } catch (error) {
       setErrors({ form: error.message || 'No pudimos guardar el producto.' })
@@ -203,38 +238,94 @@ export default function ProductForm({ open, product, onClose, onSubmit }) {
                 </div>
 
                 <div>
-                  <span className="label">Imagen del producto</span>
-                  <div className="flex items-center gap-4 rounded-2xl border border-dashed border-ink/15 bg-white/50 p-4">
-                    <div className="h-20 w-16 shrink-0 overflow-hidden rounded-lg bg-beige">
-                      {preview ? (
-                        <img src={preview} alt="Vista previa" className="h-full w-full object-cover" />
-                      ) : (
-                        <span className="grid h-full w-full place-items-center text-muted/60">
+                  <div className="flex items-baseline justify-between">
+                    <span className="label mb-0">Fotos del producto</span>
+                    <span className="text-[10px] text-muted">
+                      {entries.length ? `${entries.length} foto${entries.length === 1 ? '' : 's'}` : 'sin fotos'}
+                    </span>
+                  </div>
+
+                  <div className="mt-2 rounded-2xl border border-dashed border-ink/15 bg-white/50 p-4">
+                    {entries.length ? (
+                      <div className="flex flex-wrap gap-3">
+                        {entries.map((entry, index) => (
+                          <div
+                            key={entry.key}
+                            className="group relative h-24 w-20 overflow-hidden rounded-lg bg-beige ring-1 ring-ink/5"
+                          >
+                            <img src={entry.url} alt="" className="h-full w-full object-cover" />
+
+                            {index === 0 && (
+                              <span className="absolute inset-x-0 bottom-0 bg-clay/90 py-1 text-center text-[8px] font-medium uppercase tracking-[0.14em] text-white">
+                                Portada
+                              </span>
+                            )}
+
+                            {index > 0 && (
+                              <button
+                                type="button"
+                                onClick={() => makeCover(entry.key)}
+                                className="absolute inset-x-0 bottom-0 bg-ink/75 py-1 text-[8px] uppercase tracking-[0.1em] text-cream opacity-100 transition hover:bg-ink sm:opacity-0 sm:group-hover:opacity-100"
+                              >
+                                Hacer portada
+                              </button>
+                            )}
+
+                            <button
+                              type="button"
+                              onClick={() => removeEntry(entry.key)}
+                              aria-label="Quitar foto"
+                              className="absolute right-1 top-1 grid h-5 w-5 place-items-center rounded-full bg-ink/70 text-cream transition hover:bg-ink"
+                            >
+                              <X size={11} strokeWidth={2} />
+                            </button>
+                          </div>
+                        ))}
+
+                        <button
+                          type="button"
+                          onClick={() => fileRef.current?.click()}
+                          aria-label="Agregar más fotos"
+                          className="grid h-24 w-20 place-items-center rounded-lg border border-dashed border-ink/20 text-muted transition hover:border-clay hover:text-clay"
+                        >
+                          <Plus size={18} strokeWidth={1.6} />
+                        </button>
+                      </div>
+                    ) : (
+                      <div className="flex items-center gap-4">
+                        <div className="grid h-20 w-16 shrink-0 place-items-center rounded-lg bg-beige text-muted/60">
                           <ImagePlus size={20} strokeWidth={1.4} />
-                        </span>
-                      )}
-                    </div>
-                    <div className="flex-1">
-                      <button
-                        type="button"
-                        onClick={() => fileRef.current?.click()}
-                        className="btn-ghost px-4 py-2.5 text-[10px]"
-                      >
-                        <Upload size={14} strokeWidth={1.8} />
-                        {preview ? 'Cambiar imagen' : 'Subir imagen'}
-                      </button>
-                      <p className="mt-2 text-[11px] text-muted/80">
-                        JPG o PNG. Se guarda en el bucket público{' '}
-                        <span className="text-clay">product-images</span>.
-                      </p>
-                      <input
-                        ref={fileRef}
-                        type="file"
-                        accept="image/*"
-                        onChange={handleFile}
-                        className="hidden"
-                      />
-                    </div>
+                        </div>
+                        <div className="flex-1">
+                          <button
+                            type="button"
+                            onClick={() => fileRef.current?.click()}
+                            className="btn-ghost px-4 py-2.5 text-[10px]"
+                          >
+                            <Upload size={14} strokeWidth={1.8} />
+                            Subir fotos
+                          </button>
+                          <p className="mt-2 text-[11px] text-muted/80">
+                            Podés subir varias a la vez.
+                          </p>
+                        </div>
+                      </div>
+                    )}
+
+                    <input
+                      ref={fileRef}
+                      type="file"
+                      accept="image/*"
+                      multiple
+                      onChange={handleFiles}
+                      className="hidden"
+                    />
+
+                    <p className="mt-3 text-[11px] leading-relaxed text-muted/80">
+                      La primera foto es la portada en el catálogo y en el inicio. Las demás se ven
+                      en el carrusel del producto. Se guardan en el bucket público{' '}
+                      <span className="text-clay">product-images</span>.
+                    </p>
                   </div>
                 </div>
 

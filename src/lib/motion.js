@@ -3,11 +3,11 @@ export const EASE = [0.16, 1, 0.3, 1]
 export const EASE_SOFT = [0.22, 0.61, 0.36, 1]
 
 export const fadeUp = {
-  hidden: { opacity: 0, y: 22 },
+  hidden: { opacity: 0, y: 34 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.7, ease: EASE },
+    transition: { duration: 0.85, ease: EASE },
   },
 }
 
@@ -17,7 +17,7 @@ export const fadeIn = {
 }
 
 export const scaleReveal = {
-  hidden: { opacity: 0, scale: 0.96 },
+  hidden: { opacity: 0, scale: 0.94 },
   visible: {
     opacity: 1,
     scale: 1,

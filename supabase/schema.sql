@@ -19,6 +19,7 @@ create table if not exists public.products (
   price       numeric(12, 2) not null default 0,
   category    text not null default 'Velas',
   image_url   text,
+  images      text[] not null default '{}',
   in_stock    boolean not null default true,
   created_at  timestamptz not null default now()
 );
@@ -145,3 +146,9 @@ select * from (values
   )
 ) as seed(name, description, price, category, image_url, in_stock)
 where not exists (select 1 from public.products);
+
+-- La primera foto es la portada del producto.
+update public.products
+   set images = array[image_url]
+ where image_url is not null
+   and (images is null or cardinality(images) = 0);

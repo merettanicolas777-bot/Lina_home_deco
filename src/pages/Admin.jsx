@@ -79,15 +79,15 @@ export default function Admin() {
     )
   }, [products, term])
 
-  const handleSubmit = async (values, file) => {
+  const handleSubmit = async (values, entries) => {
     if (editing) {
-      const updated = await updateProduct(editing.id, values, file)
+      const updated = await updateProduct(editing.id, values, entries)
       setProducts((current) =>
         current.map((product) => (product.id === editing.id ? { ...product, ...updated } : product)),
       )
       setToast({ type: 'success', message: 'Producto actualizado.' })
     } else {
-      const created = await createProduct(values, file)
+      const created = await createProduct(values, entries)
       setProducts((current) => [created, ...current])
       setToast({ type: 'success', message: 'Producto creado.' })
     }

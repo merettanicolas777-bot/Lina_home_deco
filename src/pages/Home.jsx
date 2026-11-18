@@ -6,22 +6,13 @@ import { fetchProducts } from '../lib/products'
 import ProductCard from '../components/ProductCard'
 import { ProductGridSkeleton } from '../components/Skeleton'
 import { getWhatsAppNumber } from '../utils/whatsapp'
-import { EASE, container, fadeUp, scaleReveal } from '../lib/motion'
+import { container, fadeUp, scaleReveal } from '../lib/motion'
 
 const values = [
   { icon: Leaf, title: 'Cera de soja', text: '100% vegetal, sin parafina.' },
   { icon: Truck, title: 'Envíos a todo el país', text: 'Despachamos en 48 horas.' },
   { icon: Flame, title: 'Hecho a mano', text: 'Pequeños lotes, uno por uno.' },
 ]
-
-const heroLine = {
-  hidden: { opacity: 0, y: 26 },
-  visible: (index = 0) => ({
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.95, ease: EASE, delay: 0.12 + index * 0.11 },
-  }),
-}
 
 export default function Home() {
   const [products, setProducts] = useState([])
@@ -54,61 +45,25 @@ export default function Home() {
         <div className="pointer-events-none absolute -left-40 top-24 h-96 w-96 rounded-full bg-beige/60 blur-3xl" />
         <div className="mx-auto grid max-w-7xl items-center gap-12 px-5 pb-16 pt-10 sm:px-8 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16 lg:pb-24 lg:pt-14">
           <div className="relative z-10">
-            <motion.p
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, ease: EASE }}
-              className="flex items-center gap-3 text-[10px] font-medium uppercase tracking-[0.26em] text-clay sm:text-[11px]"
-            >
-              <motion.span
-                initial={{ scaleX: 0 }}
-                animate={{ scaleX: 1 }}
-                transition={{ duration: 0.9, ease: EASE, delay: 0.1 }}
-                className="h-px w-8 origin-left bg-clay/45"
-              />
+            <p className="enter-up enter-1 flex items-center gap-3 text-[10px] font-medium uppercase tracking-[0.26em] text-clay sm:text-[11px]">
+              <span className="h-px w-8 bg-clay/45" />
               Aromas &amp; objetos para tu casa
-            </motion.p>
+            </p>
 
             <h1 className="mt-6 font-serif text-[3.05rem] font-light leading-[0.97] tracking-[-0.022em] sm:text-[4.2rem] lg:text-[5.1rem]">
-              {['Rincones que', 'se sienten'].map((line, index) => (
-                <motion.span
-                  key={line}
-                  custom={index}
-                  variants={heroLine}
-                  initial="hidden"
-                  animate="visible"
-                  className="block"
-                >
-                  {line}
-                </motion.span>
-              ))}
-              <motion.span
-                custom={2}
-                variants={heroLine}
-                initial="hidden"
-                animate="visible"
-                className="block font-normal italic text-clay"
-              >
+              <span className="enter-up enter-2 block">Rincones que</span>
+              <span className="enter-up enter-3 block">se sienten</span>
+              <span className="enter-up enter-4 block font-normal italic text-clay">
                 como casa
-              </motion.span>
+              </span>
             </h1>
 
-            <motion.p
-              initial={{ opacity: 0, y: 18 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: EASE, delay: 0.42 }}
-              className="mt-7 max-w-[27rem] text-[15px] leading-[1.85] text-ink/60 sm:text-base"
-            >
+            <p className="enter-up enter-4 mt-7 max-w-[27rem] text-[15px] leading-[1.85] text-ink/60 sm:text-base">
               Velas de soja, difusores de varillas y home sprays para transformar lo cotidiano en un
               pequeño ritual de calma.
-            </motion.p>
+            </p>
 
-            <motion.div
-              initial={{ opacity: 0, y: 18 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: EASE, delay: 0.52 }}
-              className="mt-9 flex flex-col items-start gap-3 sm:flex-row sm:items-center"
-            >
+            <div className="enter-up enter-5 mt-9 flex flex-col items-start gap-3 sm:flex-row sm:items-center">
               <Link to="/catalogo" className="btn-primary group w-full sm:w-auto">
                 Ver catálogo
                 <ArrowRight
@@ -123,27 +78,19 @@ export default function Home() {
               >
                 Nuestra historia
               </Link>
-            </motion.div>
+            </div>
 
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.9, delay: 0.7 }}
-              className="mt-11 flex items-center gap-3"
-            >
+            <div className="enter-fade enter-5 mt-11 flex items-center gap-3">
               <span className="h-px w-10 bg-clay/40" />
               <span className="text-[9px] uppercase tracking-[0.24em] text-muted">
                 Handmade · Buenos Aires
               </span>
-            </motion.div>
+            </div>
           </div>
 
           <motion.div
             style={{ y: heroImageY }}
-            initial={{ opacity: 0, scale: 0.97 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1.1, ease: EASE }}
-            className="relative mx-auto w-full max-w-[520px] lg:max-w-none"
+            className="enter-fade relative mx-auto w-full max-w-[520px] lg:max-w-none"
           >
             <div className="overflow-hidden rounded-t-[220px] rounded-b-[24px] bg-beige shadow-soft">
               <img
@@ -153,13 +100,9 @@ export default function Home() {
               />
             </div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: EASE, delay: 0.55 }}
-              className="absolute -bottom-5 left-2 sm:left-6"
-            >
+            <div className="enter-up enter-6 absolute -bottom-5 left-2 sm:left-6">
               <motion.div
+                initial={false}
                 animate={prefersReduced ? undefined : { y: [0, -6, 0] }}
                 transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
                 className="flex items-center gap-3 rounded-2xl bg-cream/95 px-4 py-3 shadow-soft backdrop-blur"
@@ -174,7 +117,7 @@ export default function Home() {
                   </p>
                 </div>
               </motion.div>
-            </motion.div>
+            </div>
           </motion.div>
         </div>
       </section>
