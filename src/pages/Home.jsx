@@ -65,7 +65,7 @@ export default function Home() {
 
             <div className="enter-up enter-5 mt-9 flex flex-col items-start gap-3 sm:flex-row sm:items-center">
               <Link to="/catalogo" className="btn-primary group w-full sm:w-auto">
-                Ver catálogoolo
+                Ver catálogo
                 <ArrowRight
                   size={15}
                   strokeWidth={1.8}
