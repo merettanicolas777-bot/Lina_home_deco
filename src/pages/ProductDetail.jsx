@@ -111,7 +111,7 @@ export default function ProductDetail() {
           initial={{ opacity: 0, scale: 0.98 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6, ease: 'easeOut' }}
-          className="relative"
+          className="relative min-w-0"
         >
           <div className="relative overflow-hidden rounded-[24px] bg-beige">
             <div className="aspect-[4/5] w-full overflow-hidden">
@@ -175,7 +175,7 @@ export default function ProductDetail() {
           </div>
 
           {gallery.length > 1 && (
-            <div className="no-scrollbar mt-3 flex gap-2.5 overflow-x-auto pb-1">
+            <div className="no-scrollbar mt-3 flex min-w-0 gap-2.5 overflow-x-auto pb-1">
               {gallery.map((image, index) => (
                 <button
                   key={image + index}
@@ -215,7 +215,7 @@ export default function ProductDetail() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="lg:pt-4"
+          className="min-w-0 lg:pt-4"
         >
           <Link
             to={`/catalogo?categoria=${encodeURIComponent(product.category)}`}
