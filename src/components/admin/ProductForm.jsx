@@ -204,8 +204,8 @@ export default function ProductForm({ open, product, onClose, onSubmit }) {
                       id="product-price"
                       type="number"
                       min="0"
-                      step="100"
-                      inputMode="numeric"
+                      step="any"
+                      inputMode="decimal"
                       value={values.price}
                       onChange={(event) =>
                         setValues((current) => ({ ...current, price: event.target.value }))
