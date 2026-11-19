@@ -6,11 +6,8 @@ import {
   Check,
   ChevronLeft,
   ChevronRight,
-  Gift,
   Minus,
-  Package,
   Plus,
-  Truck,
 } from 'lucide-react'
 import { fetchProduct } from '../lib/products'
 import { useCart } from '../context/CartContext'
@@ -199,23 +196,6 @@ export default function ProductDetail() {
             </div>
           )}
 
-          <div className="mt-3 grid grid-cols-3 gap-2">
-            {[
-              { icon: Gift, label: 'Para regalar' },
-              { icon: Package, label: 'Hecho a mano' },
-              { icon: Truck, label: 'Envíos' },
-            ].map(({ icon: Icon, label }) => (
-              <div
-                key={label}
-                className="flex flex-col items-center gap-1.5 rounded-lg bg-bone/70 px-1.5 py-2.5 text-center sm:px-2 sm:py-3"
-              >
-                <Icon size={16} strokeWidth={1.6} className="text-moss" />
-                <span className="text-[10.5px] font-medium leading-tight text-muted sm:text-[11px]">
-                  {label}
-                </span>
-              </div>
-            ))}
-          </div>
         </motion.div>
 
         <motion.div
