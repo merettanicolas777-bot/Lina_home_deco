@@ -11,7 +11,7 @@ const EASE_OUT = [0.16, 1, 0.3, 1]
 const links = [
   { to: '/', label: 'Inicio' },
   { to: '/catalogo', label: 'Catálogo' },
-  { to: '/sobre-nosotros', label: 'Sobre Nosotros' },
+  { to: '/sobre-nosotros', label: 'Sobre nosotros' },
 ]
 
 export default function Navbar() {
@@ -21,26 +21,14 @@ export default function Navbar() {
   const [searchOpen, setSearchOpen] = useState(false)
   const [term, setTerm] = useState('')
   const inputRef = useRef(null)
-  const progressRef = useRef(null)
   const navigate = useNavigate()
   const location = useLocation()
 
   useEffect(() => {
-    const onScroll = () => {
-      setScrolled(window.scrollY > 12)
-
-      const max = document.documentElement.scrollHeight - window.innerHeight
-      const value = max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0
-      if (progressRef.current) progressRef.current.style.transform = `scaleX(${value})`
-    }
-
+    const onScroll = () => setScrolled(window.scrollY > 8)
     onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
-    window.addEventListener('resize', onScroll)
-    return () => {
-      window.removeEventListener('scroll', onScroll)
-      window.removeEventListener('resize', onScroll)
-    }
+    return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
   useEffect(() => {
@@ -74,60 +62,45 @@ export default function Navbar() {
   }
 
   return (
-    <header
-      className={`sticky top-0 z-40 transition-all duration-500 ${
-        scrolled
-          ? 'border-b border-ink/[0.07] bg-cream/90 backdrop-blur-xl'
-          : 'border-b border-transparent bg-cream/70 backdrop-blur-sm'
-      }`}
-    >
+    <header className="sticky top-0 z-40 px-3 pt-3 sm:px-5 sm:pt-4">
       <div
-        ref={progressRef}
-        style={{ transform: 'scaleX(0)' }}
-        className="absolute inset-x-0 bottom-0 z-10 h-[1.5px] origin-left bg-clay/60"
-        aria-hidden="true"
-      />
-
-      <div className="mx-auto flex h-[72px] max-w-7xl items-center justify-between px-5 sm:px-8 lg:h-[86px]">
-        <Link to="/" aria-label="Lina Home & Deco — inicio" className="shrink-0">
-          <Logo />
+        className={`mx-auto flex h-14 max-w-6xl items-center justify-between gap-3 rounded-xl border px-2 py-1.5 transition-all duration-500 sm:h-16 sm:px-3 sm:py-2 ${
+          scrolled
+            ? 'border-line bg-chalk/95 shadow-soft backdrop-blur-xl'
+            : 'border-line/60 bg-chalk/70 backdrop-blur-md'
+        }`}
+      >
+        <Link to="/" aria-label="Lina Home & Deco — inicio" className="shrink-0 pl-1">
+          <Logo size="sm" />
         </Link>
 
-        <nav className="hidden items-center gap-9 md:flex">
+        <nav className="hidden items-center gap-1 md:flex">
           {links.map((link) => (
             <NavLink
               key={link.to}
               to={link.to}
               className={({ isActive }) =>
-                `relative text-[11px] font-medium uppercase tracking-[0.16em] transition-colors ${
-                  isActive ? 'text-ink' : 'text-muted hover:text-ink'
+                `rounded-full px-3.5 py-2 text-[13px] transition-colors ${
+                  isActive
+                    ? 'bg-moss text-chalk'
+                    : 'font-medium text-muted hover:bg-bone/80 hover:text-ink'
                 }`
               }
             >
-              {({ isActive }) => (
-                <>
-                  {link.label}
-                  {isActive && (
-                    <motion.span
-                      layoutId="nav-underline"
-                      className="absolute -bottom-1.5 left-0 h-px w-full bg-clay"
-                    />
-                  )}
-                </>
-              )}
+              {link.label}
             </NavLink>
           ))}
         </nav>
 
-        <div className="flex items-center gap-1 sm:gap-2">
+        <div className="flex items-center gap-1.5">
           <div className="hidden items-center lg:flex">
             <AnimatePresence initial={false}>
               {searchOpen && (
                 <motion.form
                   initial={{ width: 0, opacity: 0 }}
-                  animate={{ width: 200, opacity: 1 }}
+                  animate={{ width: 208, opacity: 1 }}
                   exit={{ width: 0, opacity: 0 }}
-                  transition={{ duration: 0.3, ease: 'easeOut' }}
+                  transition={{ duration: 0.28, ease: EASE_OUT }}
                   onSubmit={submitSearch}
                   className="overflow-hidden"
                 >
@@ -137,7 +110,7 @@ export default function Navbar() {
                     onChange={(event) => setTerm(event.target.value)}
                     placeholder="Buscar velas, difusores..."
                     aria-label="Buscar productos"
-                    className="w-[200px] rounded-full border border-ink/10 bg-white/70 px-4 py-2 text-xs text-ink placeholder:text-muted/70 focus:border-clay/60 focus:outline-none"
+                    className="mr-1 w-[208px] rounded-full border border-line bg-shell px-4 py-2.5 text-[12px] text-ink placeholder:text-muted/70 focus:border-moss/50 focus:outline-none"
                   />
                 </motion.form>
               )}
@@ -146,9 +119,9 @@ export default function Navbar() {
               type="button"
               onClick={() => setSearchOpen((open) => !open)}
               aria-label="Buscar"
-              className="grid h-10 w-10 place-items-center rounded-full text-ink transition hover:bg-beige/70"
+              className="grid h-10 w-10 place-items-center rounded-full text-ink transition hover:bg-bone/80"
             >
-              <Search size={18} strokeWidth={1.6} />
+              <Search size={17} strokeWidth={1.7} />
             </button>
           </div>
 
@@ -156,16 +129,16 @@ export default function Navbar() {
             type="button"
             onClick={openCart}
             aria-label={`Abrir carrito (${count} productos)`}
-            className="relative grid h-10 w-10 place-items-center rounded-full text-ink transition hover:bg-beige/70"
+            className="relative grid h-10 w-10 place-items-center rounded-full border border-line bg-shell text-ink transition hover:border-ink/20"
           >
-            <ShoppingBag size={18} strokeWidth={1.6} />
+            <ShoppingBag size={16} strokeWidth={1.7} />
             <AnimatePresence>
               {count > 0 && (
                 <motion.span
                   initial={{ scale: 0 }}
                   animate={{ scale: 1 }}
                   exit={{ scale: 0 }}
-                  className="absolute -right-0.5 -top-0.5 grid h-[18px] min-w-[18px] place-items-center rounded-full bg-clay px-1 text-[10px] font-semibold text-white"
+                  className="absolute -right-1 -top-1 grid h-[18px] min-w-[18px] place-items-center rounded-full bg-amber px-1 text-[10px] font-bold text-ink"
                 >
                   {count}
                 </motion.span>
@@ -177,9 +150,9 @@ export default function Navbar() {
             type="button"
             onClick={() => setMobileOpen(true)}
             aria-label="Abrir menú"
-            className="grid h-10 w-10 place-items-center rounded-full text-ink transition hover:bg-beige/70 md:hidden"
+            className="grid h-10 w-10 place-items-center rounded-full border border-line bg-shell text-ink transition hover:border-ink/20 md:hidden"
           >
-            <Menu size={20} strokeWidth={1.6} />
+            <Menu size={18} strokeWidth={1.7} />
           </button>
         </div>
       </div>
@@ -187,59 +160,58 @@ export default function Navbar() {
       {mobileOpen &&
         createPortal(
           <motion.div
-            initial={{ opacity: 0, y: -8 }}
+            initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
-                          transition={{ duration: 0.32, ease: EASE_OUT }}
-              className="fixed inset-0 z-[60] flex flex-col overflow-y-auto bg-cream md:hidden"
-            >
-              <div className="flex h-[72px] shrink-0 items-center justify-between px-5">
-                <Link to="/" onClick={() => setMobileOpen(false)} aria-label="Lina Home & Deco">
-                  <Logo size="sm" />
-                </Link>
-                <button
-                  type="button"
-                  onClick={() => setMobileOpen(false)}
-                  aria-label="Cerrar menú"
-                  className="grid h-10 w-10 place-items-center rounded-full border border-ink/10 text-ink"
-                >
-                  <X size={18} strokeWidth={1.6} />
-                </button>
-              </div>
-
-              <motion.nav
-                initial="hidden"
-                animate="visible"
-                variants={{ visible: { transition: { staggerChildren: 0.07, delayChildren: 0.1 } } }}
-                className="mt-8 flex flex-col gap-1 px-7 sm:mt-12"
+            transition={{ duration: 0.3, ease: EASE_OUT }}
+            className="fixed inset-0 z-[60] flex flex-col overflow-y-auto overscroll-contain bg-chalk md:hidden"
+          >
+            <div className="flex h-[68px] shrink-0 items-center justify-between px-5">
+              <Link to="/" onClick={() => setMobileOpen(false)} aria-label="Lina Home & Deco">
+                <Logo size="sm" />
+              </Link>
+              <button
+                type="button"
+                onClick={() => setMobileOpen(false)}
+                aria-label="Cerrar menú"
+                className="grid h-10 w-10 place-items-center rounded-full border border-line bg-shell text-ink"
               >
-                {links.map((link) => (
-                  <motion.div
-                    key={link.to}
-                    variants={{ hidden: { opacity: 0, y: 14 }, visible: { opacity: 1, y: 0 } }}
-                  >
-                    <Link
-                      to={link.to}
-                      onClick={() => setMobileOpen(false)}
-                      className="block border-b border-ink/[0.07] py-4 font-serif text-3xl font-light"
-                    >
-                      {link.label}
-                    </Link>
-                  </motion.div>
-                ))}
-              </motion.nav>
+                <X size={18} strokeWidth={1.7} />
+              </button>
+            </div>
 
-              <div className="mt-auto flex justify-end px-7 pb-10 pt-8">
-                <button
-                  type="button"
-                  onClick={() => {
-                    setMobileOpen(false)
-                    openCart()
-                  }}
-                  className="text-[10px] uppercase tracking-[0.2em] text-clay"
+            <nav className="mt-4 flex flex-col gap-2.5 px-5">
+              {links.map((link, index) => (
+                <motion.div
+                  key={link.to}
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.06 * index + 0.05, duration: 0.4, ease: EASE_OUT }}
                 >
-                  Ver carrito
-                </button>
-              </div>
+                  <Link
+                    to={link.to}
+                    onClick={() => setMobileOpen(false)}
+                    className="flex items-center justify-between rounded-lg border border-line/80 bg-shell px-5 py-4 font-serif text-2xl"
+                  >
+                    {link.label}
+                    <span className="h-1.5 w-1.5 rounded-full bg-moss/50" />
+                  </Link>
+                </motion.div>
+              ))}
+            </nav>
+
+            <div className="mt-auto px-5 pb-safe pt-10">
+              <button
+                type="button"
+                onClick={() => {
+                  setMobileOpen(false)
+                  openCart()
+                }}
+                className="btn-primary w-full"
+              >
+                <ShoppingBag size={16} strokeWidth={1.8} />
+                Ver carrito{count > 0 ? ` (${count})` : ''}
+              </button>
+            </div>
           </motion.div>,
           document.body,
         )}

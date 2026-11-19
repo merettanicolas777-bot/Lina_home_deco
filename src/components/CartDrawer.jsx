@@ -73,14 +73,14 @@ export default function CartDrawer() {
   return (
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 z-50">
+        <div className="fixed inset-0 z-50 sm:p-3">
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
             onClick={closeCart}
-            className="absolute inset-0 bg-ink/35 backdrop-blur-[2px]"
+            className="absolute inset-0 bg-ink/40 backdrop-blur-[2px]"
             aria-hidden="true"
           />
 
@@ -92,31 +92,31 @@ export default function CartDrawer() {
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
             transition={{ type: 'spring', stiffness: 320, damping: 34, mass: 0.9 }}
-            className="absolute right-0 top-0 flex h-full w-full max-w-[440px] flex-col bg-cream shadow-2xl"
+            className="absolute right-0 top-0 flex h-full w-full max-w-[440px] flex-col overflow-hidden overscroll-contain bg-chalk shadow-lift sm:right-3 sm:top-3 sm:h-[calc(100%-1.5rem)] sm:rounded-2xl"
           >
-            <header className="flex items-center justify-between border-b border-ink/[0.07] px-6 py-5">
+            <header className="flex items-center justify-between px-5 pb-3 pt-5">
               <div>
                 <p className="eyebrow">Tu pedido</p>
-                <h2 className="mt-1 font-serif text-2xl">Carrito</h2>
+                <h2 className="mt-0.5 text-2xl">Carrito</h2>
               </div>
               <button
                 type="button"
                 onClick={closeCart}
                 aria-label="Cerrar carrito"
-                className="grid h-9 w-9 place-items-center rounded-full border border-ink/10 text-ink transition hover:border-ink/30"
+                className="grid h-9 w-9 place-items-center rounded-full border border-line bg-shell text-ink transition hover:border-ink/25"
               >
-                <X size={17} strokeWidth={1.6} />
+                <X size={17} strokeWidth={1.8} />
               </button>
             </header>
 
             {items.length === 0 ? (
-              <div className="flex flex-1 flex-col items-center justify-center gap-5 px-8 text-center">
-                <span className="grid h-16 w-16 place-items-center rounded-full bg-sand text-clay">
-                  <ShoppingBag size={24} strokeWidth={1.4} />
+              <div className="flex flex-1 flex-col items-center justify-center gap-4 px-8 text-center">
+                <span className="grid h-16 w-16 place-items-center rounded-full bg-bone text-moss">
+                  <ShoppingBag size={24} strokeWidth={1.5} />
                 </span>
                 <div>
-                  <h3 className="font-serif text-xl">Tu carrito está vacío</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-muted">
+                  <h3 className="text-xl">Tu carrito está vacío</h3>
+                  <p className="mt-1.5 text-[13px] leading-relaxed text-muted">
                     Sumá una vela o un difusor y empezá a crear tu rincón favorito.
                   </p>
                 </div>
@@ -126,20 +126,20 @@ export default function CartDrawer() {
               </div>
             ) : (
               <>
-                <div className="flex-1 overflow-y-auto px-6 py-5">
-                  <ul className="space-y-5">
+                <div className="min-h-0 flex-1 overflow-y-auto px-4 py-2">
+                  <ul className="space-y-2.5">
                     <AnimatePresence initial={false}>
                       {items.map((item) => (
                         <motion.li
                           key={item.id}
                           layout
-                          initial={{ opacity: 0, y: 10 }}
+                          initial={{ opacity: 0, y: 8 }}
                           animate={{ opacity: 1, y: 0 }}
-                          exit={{ opacity: 0, x: 28 }}
-                          transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-                          className="flex gap-4"
+                          exit={{ opacity: 0, x: 24 }}
+                          transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                          className="flex gap-3 rounded-lg border border-line/70 bg-shell p-2.5"
                         >
-                          <div className="h-24 w-20 shrink-0 overflow-hidden rounded-xl bg-beige">
+                          <div className="h-[88px] w-[72px] shrink-0 overflow-hidden rounded-md bg-bone">
                             <img
                               src={item.image_url || '/images/product-vela.svg'}
                               alt={item.name}
@@ -150,10 +150,10 @@ export default function CartDrawer() {
                           <div className="flex min-w-0 flex-1 flex-col justify-between py-0.5">
                             <div className="flex items-start justify-between gap-2">
                               <div className="min-w-0">
-                                <p className="text-[9px] uppercase tracking-[0.18em] text-clay">
+                                <p className="text-[11px] font-medium text-muted">
                                   {item.category}
                                 </p>
-                                <h3 className="mt-1 truncate font-serif text-base leading-snug">
+                                <h3 className="mt-0.5 truncate font-serif text-[15px] leading-snug">
                                   {item.name}
                                 </h3>
                               </div>
@@ -161,36 +161,36 @@ export default function CartDrawer() {
                                 type="button"
                                 onClick={() => removeItem(item.id)}
                                 aria-label={`Eliminar ${item.name}`}
-                                className="mt-1 text-muted/70 transition hover:text-ink"
+                                className="mt-0.5 text-muted/70 transition hover:text-ink"
                               >
-                                <Trash2 size={15} strokeWidth={1.6} />
+                                <Trash2 size={15} strokeWidth={1.7} />
                               </button>
                             </div>
 
                             <div className="flex items-end justify-between">
-                              <div className="flex items-center rounded-full border border-ink/10 bg-white/70">
+                              <div className="flex items-center rounded-full border border-line bg-chalk/60">
                                 <button
                                   type="button"
                                   onClick={() => updateQuantity(item.id, item.quantity - 1)}
                                   disabled={item.quantity <= 1}
                                   aria-label="Restar unidad"
-                                  className="grid h-8 w-8 place-items-center text-ink disabled:opacity-30"
+                                  className="grid h-7 w-7 place-items-center rounded-full text-ink disabled:opacity-30"
                                 >
-                                  <Minus size={13} strokeWidth={2} />
+                                  <Minus size={12} strokeWidth={2.2} />
                                 </button>
-                                <span className="w-6 text-center text-xs font-medium">
+                                <span className="tabular w-5 text-center text-[12px] font-semibold">
                                   {item.quantity}
                                 </span>
                                 <button
                                   type="button"
                                   onClick={() => updateQuantity(item.id, item.quantity + 1)}
                                   aria-label="Sumar unidad"
-                                  className="grid h-8 w-8 place-items-center text-ink"
+                                  className="grid h-7 w-7 place-items-center rounded-full text-ink"
                                 >
-                                  <Plus size={13} strokeWidth={2} />
+                                  <Plus size={12} strokeWidth={2.2} />
                                 </button>
                               </div>
-                              <p className="text-sm font-medium">
+                              <p className="tabular text-[13px] font-semibold">
                                 {formatARS(item.price * item.quantity)}
                               </p>
                             </div>
@@ -203,19 +203,17 @@ export default function CartDrawer() {
 
                 <form
                   onSubmit={handleCheckout}
-                  className="border-t border-ink/[0.07] bg-sand/60 px-6 pb-6 pt-5"
+                  className="border-t border-line bg-bone/40 px-5 pb-safe pt-4"
                 >
                   <div className="flex items-baseline justify-between">
-                    <span className="text-[10px] uppercase tracking-[0.18em] text-muted">
-                      Subtotal
-                    </span>
-                    <span className="font-serif text-2xl">{formatARS(subtotal)}</span>
+                    <span className="text-[12px] font-medium text-muted">Subtotal</span>
+                    <span className="tabular font-serif text-2xl">{formatARS(subtotal)}</span>
                   </div>
-                  <p className="mt-1 text-[11px] text-muted/80">
+                  <p className="mt-1 text-[12px] text-muted">
                     El envío se coordina por WhatsApp según tu zona.
                   </p>
 
-                  <div className="mt-4">
+                  <div className="mt-3.5">
                     <label className="label" htmlFor="customer-name">
                       Tu nombre
                     </label>
@@ -227,12 +225,12 @@ export default function CartDrawer() {
                         setError('')
                       }}
                       placeholder="Nombre y apellido"
-                      className="field"
+                      className="field bg-shell"
                       autoComplete="name"
                     />
                   </div>
 
-                  <fieldset className="mt-4">
+                  <fieldset className="mt-3.5">
                     <legend className="label">Método de entrega</legend>
                     <div className="grid grid-cols-2 gap-2">
                       {DELIVERY_OPTIONS.map((option) => (
@@ -241,10 +239,10 @@ export default function CartDrawer() {
                           type="button"
                           onClick={() => setDelivery(option.value)}
                           aria-pressed={delivery === option.value}
-                          className={`rounded-xl border px-3 py-2.5 text-[11px] font-medium transition ${
+                          className={`rounded-md border px-3 py-2.5 text-[12px] font-medium transition ${
                             delivery === option.value
-                              ? 'border-clay bg-white text-ink shadow-sm'
-                              : 'border-ink/10 bg-white/50 text-muted hover:border-ink/25'
+                              ? 'border-moss bg-shell text-ink'
+                              : 'border-line bg-shell/50 text-muted hover:border-ink/25'
                           }`}
                         >
                           {option.label}
@@ -254,18 +252,18 @@ export default function CartDrawer() {
                   </fieldset>
 
                   {error && (
-                    <p role="alert" className="mt-3 text-xs text-red-700">
+                    <p role="alert" className="mt-3 text-[12px] text-red-700">
                       {error}
                     </p>
                   )}
 
                   {opened && !error && (
-                    <p className="mt-3 text-xs text-clay-dark">
+                    <p className="mt-3 text-[12px] text-moss">
                       Abrimos WhatsApp con el detalle de tu pedido. ¡Gracias por elegirnos!
                     </p>
                   )}
 
-                  <button type="submit" className="btn-clay mt-5 w-full py-4">
+                  <button type="submit" className="btn-primary mt-4 w-full py-3.5">
                     <MessageCircle size={16} strokeWidth={2} />
                     Finalizar pedido por WhatsApp
                   </button>

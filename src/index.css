@@ -10,23 +10,27 @@
   }
 
   body {
-    @apply bg-cream text-ink font-sans antialiased;
+    @apply bg-chalk text-ink font-sans antialiased;
+    font-feature-settings: 'ss01' 1, 'kern' 1;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
   }
 
   ::selection {
-    @apply bg-clay/20 text-ink;
+    @apply bg-moss/15 text-ink;
   }
 
   h1,
   h2,
   h3 {
-    @apply font-serif font-light text-ink;
-    font-feature-settings: 'liga' 1, 'kern' 1;
+    @apply font-serif text-ink;
+    font-weight: 400;
+    letter-spacing: -0.015em;
     text-wrap: balance;
   }
 
-  em {
-    font-feature-settings: 'liga' 1, 'kern' 1;
+  p {
+    text-wrap: pretty;
   }
 
   input,
@@ -37,37 +41,49 @@
   }
 
   :focus-visible {
-    @apply outline-none ring-2 ring-clay/50 ring-offset-2 ring-offset-cream;
+    @apply outline-none ring-2 ring-moss/40 ring-offset-2 ring-offset-chalk;
   }
 }
 
 @layer components {
   .btn {
-    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-[11px] font-medium uppercase tracking-[0.18em] transition-all duration-300 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-40;
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-[13px] font-semibold transition-all duration-300 active:scale-[0.985] disabled:cursor-not-allowed disabled:opacity-40;
   }
 
   .btn-primary {
-    @apply btn bg-ink text-cream hover:bg-clay-dark;
+    @apply btn bg-moss text-chalk shadow-soft hover:bg-moss-dark;
   }
 
   .btn-clay {
-    @apply btn bg-clay text-white hover:bg-clay-dark;
+    @apply btn bg-amber text-ink shadow-soft hover:bg-amber/90;
   }
 
   .btn-ghost {
-    @apply btn border border-ink/15 bg-transparent text-ink hover:border-ink/40 hover:bg-white/60;
+    @apply btn border border-line bg-shell/60 text-ink hover:border-ink/25 hover:bg-shell;
   }
 
   .field {
-    @apply w-full rounded-xl border border-ink/12 bg-white/80 px-4 py-3 text-sm text-ink placeholder:text-muted/60 transition focus:border-clay focus:bg-white focus:outline-none focus:ring-2 focus:ring-clay/20;
+    @apply w-full rounded-md border border-line bg-shell px-4 py-3 text-sm text-ink shadow-inset placeholder:text-muted/60 transition focus:border-moss/60 focus:outline-none focus:ring-2 focus:ring-moss/15;
   }
 
   .label {
-    @apply mb-2 block text-[10px] font-semibold uppercase tracking-[0.18em] text-muted;
+    @apply mb-2 block text-[12px] font-medium text-muted;
   }
 
   .eyebrow {
-    @apply text-[10px] font-medium uppercase tracking-brand text-clay;
+    @apply text-[12px] font-medium text-muted;
+  }
+
+  .card {
+    @apply rounded-xl border border-line/80 bg-shell shadow-soft;
+  }
+
+  .pill {
+    @apply inline-flex items-center gap-1.5 rounded-full border border-line bg-shell px-3 py-1 text-[11px] font-medium text-muted;
+  }
+
+  .link-quiet {
+    @apply inline-flex items-center gap-1.5 rounded-full text-[13px] font-medium text-moss transition hover:text-moss-dark;
   }
 }
 
@@ -81,10 +97,22 @@
     scrollbar-width: none;
   }
 
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+
+  .pb-safe {
+    padding-bottom: max(1.25rem, env(safe-area-inset-bottom));
+  }
+
+  .pt-safe {
+    padding-top: max(0.75rem, env(safe-area-inset-top));
+  }
+
   .shimmer {
-    background: linear-gradient(90deg, #efe9dd 0%, #f7f3ec 50%, #efe9dd 100%);
+    background: linear-gradient(90deg, #e8e5da 0%, #f6f5ef 50%, #e8e5da 100%);
     background-size: 200% 100%;
-    animation: shimmer 1.6s ease-in-out infinite;
+    animation: shimmer 1.8s ease-in-out infinite;
   }
 
   @keyframes shimmer {
@@ -97,11 +125,11 @@
   }
 }
 
-/* Entradas del hero: CSS puro para que siempre se vean al abrir la página. */
+/* Entrada del hero: una sola secuencia al cargar, CSS puro. */
 @keyframes enter-up {
   from {
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(24px);
   }
   to {
     opacity: 1;
@@ -127,27 +155,35 @@
 }
 
 .enter-1 {
-  animation-delay: 0.06s;
+  animation-delay: 0.05s;
 }
 .enter-2 {
-  animation-delay: 0.16s;
+  animation-delay: 0.13s;
 }
 .enter-3 {
-  animation-delay: 0.26s;
+  animation-delay: 0.21s;
 }
 .enter-4 {
-  animation-delay: 0.36s;
+  animation-delay: 0.29s;
 }
 .enter-5 {
-  animation-delay: 0.46s;
+  animation-delay: 0.37s;
 }
 .enter-6 {
-  animation-delay: 0.56s;
+  animation-delay: 0.45s;
 }
 
 @media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
   .enter-up,
   .enter-fade {
+    animation: none;
+  }
+
+  .shimmer {
     animation: none;
   }
 }

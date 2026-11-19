@@ -140,23 +140,21 @@ export default function Admin() {
   }
 
   return (
-    <div className="min-h-screen bg-sand/50">
-      <header className="border-b border-ink/[0.07] bg-cream">
+    <div className="min-h-screen bg-chalk">
+      <header className="border-b border-line/70 bg-shell/70 backdrop-blur">
         <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-5 py-4 sm:px-8">
           <div className="flex items-center gap-4">
             <Link to="/" aria-label="Ir a la tienda">
               <Logo size="sm" />
             </Link>
             <span className="hidden h-8 w-px bg-ink/10 sm:block" />
-            <span className="hidden text-[10px] uppercase tracking-[0.2em] text-muted sm:block">
-              Panel
-            </span>
+            <span className="hidden text-[12px] font-medium text-muted sm:block">Panel</span>
           </div>
 
           <div className="flex items-center gap-3">
             <Link
               to="/"
-              className="inline-flex items-center gap-1.5 text-[10px] uppercase tracking-[0.16em] text-muted transition hover:text-ink"
+              className="inline-flex items-center gap-1.5 text-[12px] font-medium text-muted transition hover:text-ink"
             >
               Ver tienda
               <ExternalLink size={12} strokeWidth={1.8} />
@@ -168,7 +166,7 @@ export default function Admin() {
             <button
               type="button"
               onClick={signOut}
-              className="inline-flex items-center gap-1.5 rounded-full border border-ink/10 px-3.5 py-2 text-[10px] uppercase tracking-[0.14em] text-ink transition hover:border-ink/30"
+              className="inline-flex items-center gap-1.5 rounded-full border border-line bg-shell px-3.5 py-2 text-[12px] font-medium text-ink transition hover:border-ink/25"
             >
               <LogOut size={12} strokeWidth={1.8} />
               Salir
@@ -181,7 +179,7 @@ export default function Admin() {
         <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <p className="eyebrow">Administración</p>
-            <h1 className="mt-2 font-serif text-3xl font-light sm:text-4xl">Productos</h1>
+                            <h1 className="mt-2 text-3xl sm:text-4xl">Productos</h1>
             <p className="mt-2 text-sm text-muted">
               Gestioná el catálogo, el stock y las imágenes de la tienda.
             </p>
@@ -193,7 +191,7 @@ export default function Admin() {
         </div>
 
         {!isSupabaseConfigured && (
-          <div className="mt-6 flex items-start gap-3 rounded-2xl border border-clay/25 bg-clay/5 px-4 py-3.5">
+          <div className="mt-6 flex items-start gap-3 rounded-lg border border-line bg-bone/50 px-4 py-3.5">
             <AlertTriangle size={16} strokeWidth={1.6} className="mt-0.5 shrink-0 text-clay" />
             <p className="text-[11px] leading-relaxed text-muted">
               Estás viendo datos de demostración guardados en este navegador. Agregá{' '}
@@ -212,15 +210,15 @@ export default function Admin() {
           ].map((stat) => (
             <div
               key={stat.label}
-              className="rounded-2xl border border-ink/[0.07] bg-white/80 px-4 py-4 sm:px-5"
+              className="rounded-lg border border-line/80 bg-shell px-4 py-4 shadow-soft sm:px-5"
             >
-              <p className="font-serif text-3xl font-light leading-none sm:text-4xl">{stat.value}</p>
-              <p className="mt-2 text-[9px] uppercase tracking-[0.18em] text-muted">{stat.label}</p>
+              <p className="tabular font-serif text-3xl leading-none sm:text-4xl">{stat.value}</p>
+              <p className="mt-2 text-[12px] font-medium text-muted">{stat.label}</p>
             </div>
           ))}
         </div>
 
-        <div className="mt-8 rounded-[22px] border border-ink/[0.07] bg-white/60">
+        <div className="mt-8 overflow-hidden rounded-xl border border-line/80 bg-shell shadow-soft">
           <div className="flex flex-col gap-3 border-b border-ink/[0.07] px-4 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-5">
             <div className="relative w-full sm:max-w-xs">
               <Search
@@ -283,17 +281,18 @@ export default function Admin() {
               )}
             </div>
           ) : (
-            <ul className="divide-y divide-ink/[0.06]">
+            <ul className="divide-y divide-line/60">
               {filtered.map((product) => (
                 <li
                   key={product.id}
-                  className="grid gap-3 px-4 py-3.5 transition hover:bg-cream/60 sm:px-5 md:grid-cols-[minmax(0,1fr)_120px_110px_110px_150px] md:items-center md:gap-4"
+                  className="grid gap-3 px-4 py-3.5 transition hover:bg-chalk/70 sm:px-5 md:grid-cols-[minmax(0,1fr)_120px_110px_110px_150px] md:items-center md:gap-4"
                 >
                   <div className="flex min-w-0 items-center gap-3">
                     <div className="h-14 w-12 shrink-0 overflow-hidden rounded-lg bg-beige">
                       <img
                         src={product.image_url || '/images/product-vela.svg'}
                         alt=""
+                        aria-hidden="true"
                         className="h-full w-full object-cover"
                       />
                     </div>
@@ -313,9 +312,9 @@ export default function Admin() {
 
                   <div className="hidden md:block">
                     <span
-                      className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[9px] uppercase tracking-[0.12em] ${
+                      className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-medium ${
                         product.in_stock
-                          ? 'bg-clay/10 text-clay-dark'
+                          ? 'bg-moss/10 text-moss-dark'
                           : 'bg-ink/8 text-muted'
                       }`}
                     >
@@ -351,7 +350,7 @@ export default function Admin() {
                         type="button"
                         onClick={() => openEdit(product)}
                         aria-label={`Editar ${product.name}`}
-                        className="grid h-9 w-9 place-items-center rounded-full text-muted transition hover:bg-sand hover:text-ink"
+                        className="grid h-9 w-9 place-items-center rounded-full text-muted transition hover:bg-bone hover:text-ink"
                       >
                         <Pencil size={15} strokeWidth={1.6} />
                       </button>

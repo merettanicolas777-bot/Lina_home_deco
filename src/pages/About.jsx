@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom'
-import { motion } from 'framer-motion'
 import { ArrowRight, Heart, Leaf, Sparkles } from 'lucide-react'
 
 const pillars = [
@@ -22,76 +21,59 @@ const pillars = [
 
 export default function About() {
   return (
-    <div className="mx-auto max-w-7xl px-5 pb-10 pt-14 sm:px-8 sm:pt-20">
-      <div className="grid items-center gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-        >
+    <div className="mx-auto max-w-6xl px-4 pb-6 pt-6 sm:px-6 sm:pt-12">
+      <div className="grid items-center gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:gap-12">
+        <div>
           <p className="eyebrow">Sobre nosotros</p>
-          <h1 className="mt-4 font-serif text-[2.75rem] font-light leading-[1.05] sm:text-6xl">
-            Hacemos cosas
-            <br />
-            que huelen a casa
+          <h1 className="mt-2 text-[2.2rem] leading-[1.06] sm:text-[3.2rem]">
+            Hacemos cosas que huelen a casa
           </h1>
-          <p className="mt-6 max-w-lg text-[15px] leading-relaxed text-muted">
+          <p className="mt-4 max-w-lg text-[14.5px] leading-relaxed text-muted sm:mt-5 sm:text-[15px]">
             Lina Home &amp; Deco nació en 2021, en una cocina de Buenos Aires, con una olla de cera
             de soja y la idea de que los objetos cotidianos pueden cambiar el ánimo de un ambiente.
           </p>
-          <p className="mt-4 max-w-lg text-sm leading-relaxed text-muted">
+          <p className="mt-3.5 max-w-lg text-[14px] leading-relaxed text-muted">
             Empezamos con tres velas para regalar a amigas. Hoy diseñamos una colección completa de
             aromas para el hogar y para llevar: velas, difusores de varillas y de auto, home sprays,
             body splash y perfumes de cartera.
           </p>
-          <p className="mt-4 max-w-lg text-sm leading-relaxed text-muted">
+          <p className="mt-3.5 max-w-lg text-[14px] leading-relaxed text-muted">
             Seguimos siendo un equipo chico: cada pedido lo preparamos nosotros, con papel de seda,
             una tarjeta escrita a mano y la misma atención que le pondríamos a un regalo propio.
           </p>
-        </motion.div>
+        </div>
 
-        <motion.div
-          initial={{ opacity: 0, scale: 0.98 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.7 }}
-          className="overflow-hidden rounded-t-[200px] rounded-b-[24px] bg-beige"
-        >
+        <div className="overflow-hidden rounded-2xl bg-bone">
           <img
             src="/images/hero.svg"
-            alt="Ambiente cálido con vela encendida y flores secas"
-            className="h-full w-full object-cover"
+            alt="Ambiente cálido con una vela de soja encendida y flores secas"
+            className="aspect-[4/5] w-full object-cover sm:aspect-[5/6]"
           />
-        </motion.div>
+        </div>
       </div>
 
-      <div className="mt-20 grid gap-10 border-t border-ink/[0.08] pt-12 sm:grid-cols-3 sm:gap-8">
-        {pillars.map(({ icon: Icon, title, text }, index) => (
-          <motion.div
-            key={title}
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: index * 0.08 }}
-          >
-            <span className="grid h-11 w-11 place-items-center rounded-full bg-sand text-clay">
-              <Icon size={18} strokeWidth={1.4} />
+      <div className="mt-12 grid gap-3 sm:mt-16 sm:grid-cols-3 sm:gap-4">
+        {pillars.map(({ icon: Icon, title, text }) => (
+          <div key={title} className="rounded-xl border border-line/80 bg-shell p-4 sm:p-5">
+            <span className="grid h-10 w-10 place-items-center rounded-full bg-bone text-moss">
+              <Icon size={17} strokeWidth={1.7} />
             </span>
-            <h2 className="mt-5 font-serif text-2xl font-normal">{title}</h2>
-            <p className="mt-2 text-sm leading-relaxed text-muted">{text}</p>
-          </motion.div>
+            <h2 className="mt-4 text-xl leading-snug">{title}</h2>
+            <p className="mt-2 text-[13px] leading-relaxed text-muted">{text}</p>
+          </div>
         ))}
       </div>
 
-      <div className="mt-20 rounded-[28px] bg-sand px-6 py-14 text-center sm:px-10">
-        <p className="font-serif text-2xl font-light leading-snug text-ink sm:text-3xl">
+      <div className="mt-8 rounded-2xl bg-bone px-5 py-8 text-center sm:mt-14 sm:px-10 sm:py-12">
+        <p className="mx-auto max-w-2xl font-serif text-[1.35rem] leading-[1.35] text-ink sm:text-[1.9rem]">
           “La casa no es un lugar: es el aroma que te recibe cuando abrís la puerta.”
         </p>
-        <p className="mt-4 text-[10px] uppercase tracking-[0.2em] text-clay">Lina · fundadora</p>
-        <Link to="/catalogo" className="btn-primary group mt-8">
+        <p className="mt-4 text-[12px] font-medium text-muted">Lina, fundadora</p>
+        <Link to="/catalogo" className="btn-primary group mt-7">
           Explorar el catálogo
           <ArrowRight
-            size={15}
-            strokeWidth={1.8}
+            size={16}
+            strokeWidth={2}
             className="transition-transform group-hover:translate-x-1"
           />
         </Link>

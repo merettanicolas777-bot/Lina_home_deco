@@ -4,23 +4,47 @@ export default {
   theme: {
     extend: {
       colors: {
-        cream: '#FAF8F5',
-        sand: '#F5F2EB',
-        beige: '#EFE9DD',
-        ink: '#2C2A29',
-        muted: '#7C756E',
+        // Base
+        chalk: '#F2F1EA',
+        bone: '#E8E5DA',
+        shell: '#FFFFFF',
+        line: '#DCD8CB',
+        ink: '#23251F',
+        muted: '#6E7167',
+        // Acentos
+        moss: {
+          DEFAULT: '#3F4A3A',
+          light: '#8A957E',
+          dark: '#2E372A',
+        },
+        amber: '#B98B4E',
+        // Aliases heredados (admin, formularios, PWA)
+        cream: '#F2F1EA',
+        sand: '#E8E5DA',
+        beige: '#E4E0D2',
         clay: {
-          DEFAULT: '#A68A64',
-          light: '#C4A484',
-          dark: '#8C7150',
+          DEFAULT: '#3F4A3A',
+          light: '#8A957E',
+          dark: '#2E372A',
         },
       },
       fontFamily: {
-        serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
-        sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+        display: ['Fraunces', 'Georgia', 'serif'],
+        serif: ['Fraunces', 'Georgia', 'serif'],
+        sans: ['Manrope', 'system-ui', 'sans-serif'],
+      },
+      borderRadius: {
+        xs: '6px',
+        sm: '10px',
+        md: '14px',
+        lg: '20px',
+        xl: '26px',
+        '2xl': '32px',
+        '3xl': '40px',
+        '4xl': '48px',
       },
       letterSpacing: {
-        brand: '0.28em',
+        brand: '0.18em',
       },
       opacity: {
         8: '0.08',
@@ -31,17 +55,24 @@ export default {
         85: '0.85',
       },
       boxShadow: {
-        soft: '0 24px 60px -32px rgba(44, 42, 41, 0.35)',
-        card: '0 12px 40px -28px rgba(44, 42, 41, 0.45)',
+        soft: '0 2px 4px -2px rgba(35, 37, 31, 0.06), 0 20px 40px -30px rgba(35, 37, 31, 0.4)',
+        card: '0 1px 2px rgba(35, 37, 31, 0.04), 0 26px 48px -34px rgba(35, 37, 31, 0.45)',
+        lift: '0 3px 8px -3px rgba(35, 37, 31, 0.1), 0 34px 60px -38px rgba(35, 37, 31, 0.5)',
+        inset: 'inset 0 1px 0 rgba(255, 255, 255, 0.7)',
       },
       keyframes: {
         'fade-up': {
           '0%': { opacity: '0', transform: 'translateY(12px)' },
           '100%': { opacity: '1', transform: 'translateY(0)' },
         },
+        'fade-in': {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
       },
       animation: {
-        'fade-up': 'fade-up 0.6s ease-out both',
+        'fade-up': 'fade-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) both',
+        'fade-in': 'fade-in 0.4s ease-out both',
       },
     },
   },

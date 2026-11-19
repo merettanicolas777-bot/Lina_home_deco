@@ -63,7 +63,7 @@ export default function InstallApp({ compact = false }) {
 
   if (installed) {
     return (
-      <p className="inline-flex items-center gap-1.5 text-[10px] uppercase tracking-[0.16em] text-clay-dark">
+      <p className="inline-flex items-center gap-1.5 text-[12px] font-medium text-moss">
         <Check size={12} strokeWidth={2} />
         App instalada
       </p>
@@ -77,7 +77,7 @@ export default function InstallApp({ compact = false }) {
         onClick={handleInstall}
         className={
           compact
-            ? 'inline-flex items-center gap-1.5 rounded-full border border-ink/10 px-3.5 py-2 text-[10px] uppercase tracking-[0.14em] text-ink transition hover:border-ink/30'
+            ? 'inline-flex items-center gap-1.5 rounded-full border border-line bg-shell px-3.5 py-2 text-[12px] font-medium text-ink transition hover:border-ink/25'
             : 'btn-ghost w-full'
         }
       >
@@ -99,10 +99,10 @@ export default function InstallApp({ compact = false }) {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 10 }}
-              className="relative w-full max-w-sm rounded-[22px] bg-cream p-6 shadow-2xl"
+              className="relative w-full max-w-sm rounded-xl bg-chalk p-6 shadow-lift"
             >
               <div className="flex items-start justify-between">
-                <span className="grid h-10 w-10 place-items-center rounded-full bg-sand text-clay">
+                <span className="grid h-10 w-10 place-items-center rounded-full bg-bone text-moss">
                   <Smartphone size={18} strokeWidth={1.5} />
                 </span>
                 <button

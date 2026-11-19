@@ -142,7 +142,7 @@ export default function ProductForm({ open, product, onClose, onSubmit }) {
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: 30, opacity: 0 }}
             transition={{ duration: 0.35, ease: [0.32, 0.72, 0, 1] }}
-            className="relative z-10 flex max-h-[92vh] w-full max-w-2xl flex-col overflow-hidden rounded-t-[24px] bg-cream shadow-2xl sm:rounded-[24px]"
+            className="relative z-10 flex max-h-[92vh] w-full max-w-2xl flex-col overflow-hidden rounded-t-xl bg-chalk shadow-lift sm:rounded-xl"
           >
             <header className="flex items-start justify-between border-b border-ink/[0.07] px-6 py-5">
               <div>
@@ -245,7 +245,7 @@ export default function ProductForm({ open, product, onClose, onSubmit }) {
                     </span>
                   </div>
 
-                  <div className="mt-2 rounded-2xl border border-dashed border-ink/15 bg-white/50 p-4">
+                  <div className="mt-2 rounded-lg border border-dashed border-line bg-shell/70 p-4">
                     {entries.length ? (
                       <div className="flex flex-wrap gap-3">
                         {entries.map((entry, index) => (
@@ -329,7 +329,7 @@ export default function ProductForm({ open, product, onClose, onSubmit }) {
                   </div>
                 </div>
 
-                <div className="flex items-center justify-between rounded-2xl border border-ink/[0.08] bg-white/60 px-4 py-3.5">
+                                  <div className="flex items-center justify-between rounded-lg border border-line bg-shell px-4 py-3.5">
                   <div>
                     <p className="text-xs font-medium text-ink">Disponible para la venta</p>
                     <p className="mt-0.5 text-[11px] text-muted">

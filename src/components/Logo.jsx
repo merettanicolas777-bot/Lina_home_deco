@@ -1,7 +1,7 @@
 const SIZES = {
-  sm: 'h-12 w-12',
-  md: 'h-14 w-14 sm:h-[68px] sm:w-[68px]',
-  lg: 'h-24 w-24',
+  sm: 'h-10 w-10',
+  md: 'h-12 w-12 sm:h-14 sm:w-14',
+  lg: 'h-20 w-20',
 }
 
 export default function Logo({ className = '', size = 'md' }) {
@@ -11,7 +11,7 @@ export default function Logo({ className = '', size = 'md' }) {
         src="/images/logo.png"
         alt="Lina Home & Deco"
         draggable="false"
-        className={`${SIZES[size] ?? SIZES.md} object-contain`}
+        className={`${SIZES[size] ?? SIZES.md} object-contain mix-blend-multiply`}
       />
     </span>
   )

@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import CartDrawer from './components/CartDrawer'
+import WhatsAppFab from './components/WhatsAppFab'
 import ProtectedRoute from './components/ProtectedRoute'
 import Home from './pages/Home'
 import Catalog from './pages/Catalog'
@@ -70,6 +71,7 @@ export default function App() {
       </Routes>
 
       <CartDrawer />
+      <WhatsAppFab />
     </>
   )
 }

@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
-import { motion } from 'framer-motion'
 import { ArrowLeft, Eye, EyeOff, ShieldCheck } from 'lucide-react'
 import Logo from '../components/Logo'
 import InstallApp, { usePanelManifest } from '../components/InstallApp'
@@ -52,44 +51,41 @@ export default function Login() {
   }
 
   return (
-    <div className="flex min-h-screen flex-col bg-cream">
-      <div className="mx-auto flex w-full max-w-7xl items-center justify-between px-5 py-6 sm:px-8">
+    <div className="flex min-h-screen flex-col bg-chalk">
+      <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-4 py-5 sm:px-6">
         <Link to="/" aria-label="Volver al inicio">
           <Logo size="sm" />
         </Link>
         <Link
           to="/"
-          className="inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.18em] text-muted transition hover:text-ink"
+          className="inline-flex items-center gap-1.5 rounded-full border border-line bg-shell/60 px-3.5 py-2 text-[12px] font-medium text-muted transition hover:text-ink"
         >
-          <ArrowLeft size={13} strokeWidth={1.8} />
+          <ArrowLeft size={13} strokeWidth={2} />
           Volver a la tienda
         </Link>
       </div>
 
-      <div className="flex flex-1 items-center justify-center px-5 pb-16">
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="w-full max-w-md rounded-[24px] border border-ink/[0.07] bg-white/70 p-7 shadow-soft sm:p-9"
-        >
-          <span className="grid h-11 w-11 place-items-center rounded-full bg-sand text-clay">
-            <ShieldCheck size={19} strokeWidth={1.4} />
+      <div className="flex flex-1 items-center justify-center px-4 pb-14">
+        <div className="w-full max-w-md rounded-2xl border border-line/80 bg-shell p-5 shadow-card sm:p-8">
+          <span className="grid h-11 w-11 place-items-center rounded-full bg-bone text-moss">
+            <ShieldCheck size={19} strokeWidth={1.6} />
           </span>
 
-          <h1 className="mt-6 font-serif text-3xl font-light">Panel de administración</h1>
-          <p className="mt-2 text-sm text-muted">
+          <h1 className="mt-4 text-[1.75rem] leading-tight sm:mt-5 sm:text-[1.9rem]">
+            Panel de administración
+          </h1>
+          <p className="mt-2 text-[13.5px] text-muted">
             Ingresá con la cuenta de la tienda para gestionar productos.
           </p>
 
           {!isSupabaseConfigured && (
-            <p className="mt-5 rounded-xl bg-sand px-4 py-3 text-[11px] leading-relaxed text-muted">
+            <p className="mt-5 rounded-lg bg-bone/70 px-4 py-3 text-[12px] leading-relaxed text-muted">
               Modo demo activo: todavía no hay credenciales de Supabase. Podés ingresar con
               cualquier email y contraseña para explorar el panel.
             </p>
           )}
 
-          <form onSubmit={handleSubmit} className="mt-7 space-y-4">
+          <form onSubmit={handleSubmit} className="mt-6 space-y-4">
             <div>
               <label className="label" htmlFor="email">
                 Email
@@ -125,29 +121,33 @@ export default function Login() {
                   aria-label={showPassword ? 'Ocultar contraseña' : 'Mostrar contraseña'}
                   className="absolute right-3 top-1/2 -translate-y-1/2 text-muted transition hover:text-ink"
                 >
-                  {showPassword ? <EyeOff size={16} strokeWidth={1.6} /> : <Eye size={16} strokeWidth={1.6} />}
+                  {showPassword ? (
+                    <EyeOff size={16} strokeWidth={1.8} />
+                  ) : (
+                    <Eye size={16} strokeWidth={1.8} />
+                  )}
                 </button>
               </div>
             </div>
 
             {error && (
-              <p role="alert" className="rounded-xl bg-red-50 px-4 py-3 text-xs text-red-700">
+              <p role="alert" className="rounded-lg bg-red-50 px-4 py-3 text-[12px] text-red-700">
                 {error}
               </p>
             )}
 
-            <button type="submit" disabled={submitting} className="btn-primary w-full py-4">
+            <button type="submit" disabled={submitting} className="btn-primary w-full py-3.5">
               {submitting && <Spinner className="h-3.5 w-3.5" />}
               {submitting ? 'Ingresando...' : 'Ingresar'}
             </button>
           </form>
 
-          <p className="mt-6 text-center text-[11px] leading-relaxed text-muted/80">
+          <p className="mt-5 text-center text-[12px] leading-relaxed text-muted">
             Acceso exclusivo para la administración de Lina Home &amp; Deco.
           </p>
 
-          <div className="mt-6 border-t border-ink/[0.07] pt-5">
-            <p className="text-[11px] leading-relaxed text-muted">
+          <div className="mt-5 border-t border-line pt-4">
+            <p className="text-[12px] leading-relaxed text-muted">
               ¿Gestionás la tienda desde el celular? Instalá el panel como app y abrilo desde el
               ícono, en pantalla completa.
             </p>
@@ -155,7 +155,7 @@ export default function Login() {
               <InstallApp />
             </div>
           </div>
-        </motion.div>
+        </div>
       </div>
     </div>
   )
